@@ -55,3 +55,4 @@
 550 print:print"you used";t;"move(s)."
 560 print:print"would you like to play again (y/n)";
 570 input i$:if i$<>"y" and i$<>"n" then print:print"(y) or (n) please.":goto 570
+580 if i$="y" then 320
