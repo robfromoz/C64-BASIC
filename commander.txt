@@ -1,6 +1,6 @@
 ﻿10 rem commander-in-chief
-20 poke 53280,9:poke 53281,7
-30 z=rnd(-ti):print"“":print"this game is called commander-in-chief."
+20 poke 53280,9:poke 53281,7:poke 646,0
+30 z=rnd(-ti):print"“":print"this game is called commander-in-chief."
 40 print:print"the object is to decide how many"
 50 print"nuclear arms your country builds and"
 60 print"whether or not your country is at war"
