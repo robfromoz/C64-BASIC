@@ -1,0 +1,66 @@
+10 rem birthday r vonk
+20 rem from "the pocket computer game book #2" by e schlossberg and j brockman
+30 rem 1977, p. 26
+35 poke 53280,6:poke 53281,6:poke 646,1
+40 print"“":print"this game is called 'birthday'."
+50 print:print"the objective of this game is to"
+60 print"reverse a multi-digit number in less"
+70 print"than ten steps."
+80 print:print"enter your year, day, and month of your"
+90 print"birth in that order. if your birthday or"
+100 print"your birth month is a single digit,"
+110 print"i.e. 9, enter 09."
+120 print:print"by adding, subtracting, multiplying, or"
+130 print"dividing using no larger than two-digit"
+140 print"numbers, see if you can reverse the"
+150 print"digits of the number. for example: if"
+160 print"your year of birth is 45 (i.e. 1945),"
+170 print"your day of birth 19, and your month of"
+180 print"birth 11, then your number would be"
+190 print"451911. you want to arrive at 119154"
+200 print"using addition, subtraction,"
+210 print"multiplication, and division with two-"
+220 print"digit numbers in less than ten steps."
+230 print"                              hit a key"
+240 get i$:if i$="" then 240
+250 print"“":print"you may use decimal numbers (i.e. 4.4)."
+260 print"if you succeed in less than five steps,"
+270 print"you are a champ."
+280 for i=1 to 19:print:next i:print"                              hit a key"
+290 get i$:if i$="" then 290
+300 print"“":print"ok, enter your date of birth as yymmdd"
+310 input b$:b=val(b$)
+320 if b>99999 and b<100000 then 370
+330 if b=int(b) then 370
+340 if mid$(b$,3,2)>"00" and mid$(b$,3,2)<"13" then 370
+350 if mid$(b$,5,2)>"00" and mid$(b$,5,2)<"32" then 370
+360 print:print"invalid date, please re-enter.":goto 310
+370 r$="":for i=6 to 1 step -1:r$=r$+mid$(b$,i,1):next i:r=val(r$)
+380 print"“":print"your number is";b;"and you must get"
+390 print"to";r;"in ten moves or less.":t=0
+400 print:print"enter an operation and a number"
+410 print"(e.g. /5)";
+420 input i$:n$=mid$(i$,2):n=val(n$):o$=left$(i$,1)
+430 if (left$(n$,1)="." or mid$(n$,2,1)=".") and len(n$)=3 then 460
+440 if n>0 and n<100 then 460
+450 print:print"invalid number. must have 1-2 digits.":goto 420
+460 if o$="*" or o$="+" or o$="-" or o$="/" then 480
+470 print"operation must be (*-=/).":goto 420
+480 print:print"ok,";b;o$;n;"makes";
+490 if o$="*" then b=b*n
+500 if o$="+" then b=b+n
+510 if o$="-" then b=b-n
+520 if o$="/" then b=b/n
+530 if b<>int(b) then b=int(b*100)/100
+540 print b:t=t+1:if t=10 or b=r then 560
+550 print"you have";10-t;"moves left.":goto 400
+560 if b=r then 590
+570 print:print"hard luck, you didn't manage to reverse"
+580 print"your number. better luck next time.":print:goto 610
+590 print:print"well done! you reversed your number!"
+600 print:print"it took you";t;"moves."
+610 input"would you like to play again (y/n)";i$:if i$<>"y" and i$<>"n" then 610
+620 if i$="n" then end
+630 input"use the same birth date (y/n)";i$:if i$<>"y" and i$<>"n" then 630
+640 if i$="n" then 300
+650 b=val(b$):goto 370
