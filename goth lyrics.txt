@@ -1,0 +1,58 @@
+10 rem random goth lyric generator
+20 rem javascript by c herdt and m tarrow, 1998
+30 rem converted to basic by r vonk, 2020
+40 z=rnd(-ti):na=22:sa=35:sb=27:va=31:vb=33:ad=57:ob=47
+50 data abyss,noir,eldritch,cave,cthulu,ivy,hypo,fiend,kabbal,mortis,alien
+60 data newbaten,mordant,rasputin,osiris,suspiria,belladonna,malaisia
+70 data dehydrette,dropsy,fantazius,corvus
+80 data the devil,a black cat,the spider,a dull knife,evil,fire,she,everything
+90 data loneliness,the mask,jesus,the slave,my slave,my master,terror
+100 data my solitude,sorrow,my anguish,icarus,persephone,the moon,death,faith
+110 data the muse,oblivion,my lust,a vavenous she-wolf,your touch,my prey
+120 data the asylum,this torrential rain,agony,the stench,hunger,darkness
+130 data devils,black cats,spiders,daggers,spirits,pyres,i,banshees,thine eyes
+140 data sinners,prayers,souls,wolves,rats,bats,seraphim,thorns,harpies
+150 data blazing pinions,ravens,vermin,you,foolish mortals,serpents,nosferatu
+160 data worms,vengeful cripples
+170 data secretes,destroys,spins,slices,engulfs,eviscerates,whispers,clings to
+180 data hides under,kisses,writhes,howls,sobs,cries,mourns,consumes
+190 data lies weeping,ascends,desires,entangles,grovels before,spirals,summons
+200 data plucks,curses,quivers,unleashes,dances on,permeates,scoffs at
+210 data spews forth
+220 data secrete,destroy,spin,slice,engulf,eviscerate,whisper,cling to
+230 data hide under,kiss,writhe,lock up,murder,conspire,langusih,suffer,regret
+240 data suck,devour,desire,shroud,taunt,swell with,implore,stalk,unleash
+250 data call forth,drink,collapse from,shudder with,recoil from
+260 data run amuck through,feign
+270 data bloody,nocturnal,delicate,helpless,virginal,clandestine,unclean,dark
+280 data lonely,lethargic,desperate,sanguine,luscious,sweet,midnight,inner
+290 data blackened,feral,whirling,velvet,trembling,dying,leathery,silver,red
+300 data yearning,precious,mocking,infernal,labyrinthine,beloved,severed
+310 data enraptured,incessant,celestial,unfathomable,blasphemous,tainted
+320 data embittered,vile,hollow,cringing,gloomy,melancholy,crucified
+330 data excruciating,malodorous,spectral,diseased,serpentine,fleeting,barren
+340 data perfidious,darkened,elysian,lugubrious,baleful
+350 data poison,innocents,webs,beauty,graves,manacles,despair,night,needles
+360 data fangs,passion,divide,marrow,tombs,abattoir,terror,prayers,splendor
+370 data soul,tears,void,nothingness,concubine,brilliance,torment,deception
+380 data glossolalia,sepulchre,clutches,caresses,effervescence,rapture,decay
+390 data twilight,fragments,carrion,addiction,psychosis,disillusionment
+400 data arterial spray,eclipse,treachery,requiem,decrepitude,minions,penance
+410 data impudence
+420 dim na$(na),sa$(sa),sb$(sb),va$(va),vb$(vb),ad$(ad),ob$(ob)
+430 for i=1 to na:read na$(i):next i:for i=1 to sa:read sa$(i):next i
+440 for i=1 to sb:read sb$(i):next i:for i=1 to va:read va$(i):next i
+450 for i=1 to vb:read vb$(i):next i:for i=1 to ad:read ad$(i):next i
+460 for i=1 to ob:read ob$(i):next i
+470 print"“";:poke 53280,0:poke 53281,0:poke 646,1
+480 f$=na$(int(rnd(1)*na+1)):l$=na$(int(rnd(1)*na+1)):print"by ";f$;" ";l$:print
+490 for i=1 to 4:for j=1 to 4:r=rnd(1):if r>.5 then 530
+500 gs$=sa$(int(rnd(1)*sa+1)):gv$=va$(int(rnd(1)*va+1))
+510 ga$=ad$(int(rnd(1)*ad+1)):og$=ob$(int(rnd(1)*ob+1))
+520 print gs$;" ";gv$;" ";ga$;" ";og$:goto 560
+530 gs$=sb$(int(rnd(1)*sb+1)):gv$=vb$(int(rnd(1)*vb+1))
+540 ga$=ad$(int(rnd(1)*ad+1)):og$=ob$(int(rnd(1)*ob+1))
+550 print gs$;" ";gv$;" ";ga$;" ";og$
+560 next j:print:next i
+570 get i$:if i$="" then 570
+580 goto 470
