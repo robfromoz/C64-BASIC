@@ -1,0 +1,31 @@
+10 rem house of dust
+20 rem originally by a knowles and j tunney, 1967
+30 rem javascript code by z whalen, 2014
+40 rem converted to basic by r vonk, 2017
+50 print"“":z=rnd(-ti):ma=17:lo=21:li=4:in=13:dim ma$(ma),lo$(lo),li$(li),in$(in)
+60 for i=1 to ma:read ma$(i):next i:for i=1 to lo:read lo$(i):next i
+70 for i=1 to li:read li$(i):next i:for i=1 to in:read in$(i):next i
+80 rem materials
+90 data dust,brick,paper,leaves,roots,discarded clothing,weeds,wood,tin,sand
+100 data glass,stone,straw,plastic,mud,broken dishes,plastic
+110 rem places
+120 data on open ground,by a river,among high mountains,in a deserted airport
+130 data in dense woods,on an island,in a hot climate,in a desert,on the sea
+140 data in a deserted factory,underwater,in southern france
+150 data inside a mountain,in an overpopulated area,in japan
+160 data in a place with both heavy rain and bright sun,by an abandoned lake
+170 data in michigan,by the sea,"in a cold, windy climate",among small hills
+180 rem lights
+190 data natural light,candles,all available lighting,electricity
+200 rem inhabitants
+210 data people who eat a great deal,lovers,friends and enemies
+220 data collectors of all types,women wearing all colors
+230 data all races of men wearing predominantly red clothing,little boys
+240 data children and old people,horses and birds,various birds and fishes
+250 data american indians,french and german speaking people
+260 data people who sleep almost all the time
+270 n1=int(rnd(1)*ma+1):n2=int(rnd(1)*lo+1)
+280 n3=int(rnd(1)*li+1):n4=int(rnd(1)*in+1)
+290 print"a house of ";ma$(n1):print"      ";lo$(n2):print"            using ";li$(n3)
+300 print"                  inhabited by ";in$(n4)
+310 for i=1 to 2000:next i:print:goto 270
