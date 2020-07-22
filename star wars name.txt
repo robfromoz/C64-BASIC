@@ -1,0 +1,45 @@
+10 rem star wars name generator r vonk
+20 poke 53280,0:poke 53281,0:poke 646,1
+30 print"“":print"this program is called 'the star wars"
+40 print"name generator'."
+50 print:print"have you always wanted to have your"
+60 print"very own star wars name? below is a"
+70 print"simple formula used to achieve such a"
+80 print"task. for example, the author's name is"
+90 print"'robvo sutra, ovastra of nurofen'."
+100 print:print"for your first name:"
+110 print:print"1. take the first three letters of your"
+120 print"   first name."
+130 print:print"2. then add the first two letters of"
+140 print"   your last name."
+150 print:print"for your last name:"
+160 print:print"1. take the first two letters of your"
+170 print"   mother's maiden name."
+180 print:print"                              hit a key"
+190 get i$:if i$="" then 190
+200 print"“":print"last name (cont.):"
+210 print:print"2. then add the first three letters of"
+220 print"the city you were born."
+230 print:print"star wars honourific name:"
+240 print:print"1. take the last three letters of your"
+250 print"   last name."
+260 print:print"2. add the name of the first car you"
+270 print"   drove."
+280 print:print"3. insert the word 'of'."
+290 print:print"4. tack on the name of the last"
+300 print"   medication you took."
+310 print:print:print:print:print:print"                              hit a key"
+320 get i$:if i$="" then 320
+330 print"“":input"your first name";f$
+340 print:input"your last name";l$
+350 print:input"your mother's maiden name";m$
+360 print:input"your city of birth";b$
+370 print:input"model of your first car";c$
+380 print:input"the last medication you took";p$
+390 n$=left$(f$,3)+left$(l$,2)+" "+left$(m$,2)+left$(b$,3)+", "
+400 n$=n$+mid$(l$,3,1)+mid$(l$,2,1)+left$(l$,1)+c$+" of "+p$
+410 print"“":for i=1 to 9:print:next i:print tab(8);"your star wars name is:"
+420 print:print tab(35-len(n$));n$
+430 print:print:print:print:print"another name";
+440 input i$:if i$<>"y" and i$<>"n" then print"(y) or (n) please.":goto 440
+450 if i$="y" then 330
