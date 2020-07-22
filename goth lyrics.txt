@@ -20,7 +20,7 @@
 200 data plucks,curses,quivers,unleashes,dances on,permeates,scoffs at
 210 data spews forth
 220 data secrete,destroy,spin,slice,engulf,eviscerate,whisper,cling to
-230 data hide under,kiss,writhe,lock up,murder,conspire,langusih,suffer,regret
+230 data hide under,kiss,writhe,lock up,murder,conspire,languish,suffer,regret
 240 data suck,devour,desire,shroud,taunt,swell with,implore,stalk,unleash
 250 data call forth,drink,collapse from,shudder with,recoil from
 260 data run amuck through,feign
