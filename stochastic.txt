@@ -1,0 +1,19 @@
+10 rem stochastic texts
+20 rem originally by t lutz, 1959
+30 rem javascript code by n montfort, 2014
+40 rem converted to basic by r vonk, 2020
+50 z=rnd(-ti):def fnr(x)=int(rnd(1)*x+1)
+60 data count,stranger,look,church,castle,picture,eye,village,tower,farmer,way
+70 data guest,day,house,table,labourer
+80 data open,silent,strong,good,narrow,near,new,quiet,far,deep,late,dark,free
+90 data large,old,angry
+100 data " and "," or "," therefore ",". ",". ",". ",". ",". "
+110 data a,every,no,not every
+120 dim su$(16),pr$(16),co$(8),op$(4)
+130 for i=1 to 16:read su$(i):next i:for i=1 to 16:read pr$(i):next i
+140 for i=1 to 8:read co$(i):next i:for i=1 to 4:read op$(i):next i:print"“"
+150 gosub 180:print te$+pr$(fnr(16))+co$(fnr(8));
+160 gosub 180:print te$+pr$(fnr(16))+"."
+170 print:for i=1 to 500:next i:goto 150
+180 te$=op$(fnr(4))+" "+su$(fnr(16)):if te$="a eye" then te$="an eye"
+190 te$=te$+" is ":return
