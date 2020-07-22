@@ -1,0 +1,80 @@
+10 rem dice dodge r vonk
+20 rem based on dice game of same name by n reymann 2012
+30 poke 53280,0:poke 53281,1:poke 646,0
+40 z=rnd(-ti):print"“":print"this game is called 'dice dodge'."
+50 print:print"the object is to the get as mamy points"
+60 print"as possible."
+70 print:print"the game board looks like this:"
+80 print:print"               1 2 3 4 5 6"
+90 print:print"             1 . . . . . ."
+100 print:print"             2 . . . . . ."
+110 print:print"             3 . . . . . ."
+120 print:print"             4 . . . . . ."
+130 print:print"             5 . . . . . ."
+140 print:print"             6 . . . . . ."
+150 print:print:print"                              hit a key"
+160 get i$:if i$="" then 160
+170 print"“":print"two dice are used, the first die for"
+180 print"the rows and the other for the columns."
+190 print:print"each play is as follows:"
+200 print"1) roll both dice"
+210 print"2) place a marker on the intersection"
+220 print"of the row and column that is rolled."
+230 print"for example, if you rolled a 3 on the"
+240 print"rows die and a 5 on the columns die,"
+250 print"you would place a marker on the space"
+260 print"corresponding to the fifth row from"
+270 print"the left and the third row from the"
+280 print"top."
+290 print"3) re-roll both dice, or just the one,"
+300 print"and place another marker on the"
+310 print"corresponding intersection if it is"
+320 print"not already filled. if you re-roll one"
+330 print"die, the other keeps the same value it"
+340 print"had previously. if you roll a space"
+350 print"that has a marker on it, the game ends"
+360 print"and your score is tallied, otherwise"
+370 print"keep repeating this step."
+380 print"                              hit a key"
+390 get i$:if i$="" then 390
+400 print"“":print"your score is calculated by taking the"
+410 print"squares of the number of markers in"
+420 print"each column and row, and adding them"
+430 print"all together. each marker will be"
+440 print"scored twice: once as part of its"
+450 print"column, and once as part of its row."
+460 for i=1 to 16:print:next i:print"                              hit a key"
+470 get i$:if i$="" then 470
+480 dim b(6,6)
+490 for i=1 to 6:for j=1 to 6:b(i,j)=0:next j,i:d1=0:d2=0:t=0
+500 print"“":print tab(15);"1 2 3 4 5 6"
+510 print:for i=1 to 6:print tab(12);i;:for j=1 to 6
+520 if b(i,j)=0 then print". ";:goto 540
+530 print"o ";
+540 next j:print:print:next i
+550 if t=36 then 710
+560 if d1>0 then 640
+570 print"hit a key to roll the dice."
+580 get i$:if i$="" then 580
+590 print:print"rolling...";:d1=int(rnd(1)*6+1):d2=int(rnd(1)*6+1)
+600 for i=1 to 1000:next i:print"the roll is";d1;d2
+610 if b(d1,d2)=1 then 720
+620 print:print"you put a marker in that square.":b(d1,d2)=1:t=t+1
+630 for i=1 to 1500:next i:goto 500
+640 print"reroll (b)oth dice or die (1) or (2)";
+650 input i$:if i$<>"b" and i$<>"1" and i$<>"2" then print"b/1/2 please.":goto 650
+660 print:print"rolling...";
+670 if i$="2" then 690
+680 d1=int(rnd(1)*6+1):if i$="1" then 700
+690 d2=int(rnd(1)*6+1)
+700 goto 600
+710 print:print"well done, you covered the whole board!":goto 730
+720 print:print"there's a marker in that square."
+730 for i=1 to 6:f=0:for j=1 to 6:if b(i,j)=1 then f=f+1
+740 next j:s=s+f^2:next i
+750 for i=1 to 6:f=0:for j=1 to 6:if b(j,i)=1 then f=f+1
+760 next j:s=s+f^2:next i
+770 print:print"game over. your score is";s
+780 print:print"would you like to play again (y/n)";
+790 input i$:if i$<>"y" and i$<>"n" then print:print"(y) or (n) please.":goto 790
+800 if i$="y" then 490
