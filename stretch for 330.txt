@@ -1,0 +1,41 @@
+10 rem stretch for 330 r vonk
+20 rem from "the calculator game book for kids of all ages" by a hartman, 1977
+30 rem p.129
+40 poke 53280,11:poke 53281,0:poke 646,1
+50 z=rnd(-ti):print"“":print"this game is called 'stretch for 330'."
+60 print:print"the object of the game is to get a"
+70 print"final sum as close to 330 as possible."
+80 print:print"you have a deck of 9 cards numbered 2"
+90 print"to 10, and nine multipliers numbered 1"
+100 print"to 9."
+110 print:print"turn over a card from the stack and"
+120 print"decide by which number 1-9 you will"
+130 print"multiply that face value. that number"
+140 print"is then crossed out. continue this way"
+150 print"until you've used all 9 cards and each"
+160 print"of the multipliers 1-9. your final sum"
+170 print"is the sum of those 9 products."
+180 for i=1 to 6:print:next i:print"                              hit a key"
+190 get i$:if i$="" then 190
+200 dim c(9),m(9)
+210 for i=1 to 9:c(i)=i+1:m(i)=1:next i
+220 for i=1 to 9:r=int(rnd(1)*9+1):t=c(r):c(r)=c(i):c(i)=t:next i:n=0:c=0
+230 print"“":print tab(13);"your sum is";n
+240 print:print tab(9);"multipliers available:"
+250 print:print tab(6);:for i=1 to 9:if m(i)=1 then print i;
+260 next i
+270 print:print:print"hit a key to draw a card."
+280 get i$:if i$="" then 280
+290 c=c+1:print:print"the card is";c(c)
+300 print:print"which multiplier do you choose";
+310 input i:if i<1 or i>9 then print:print"(1) to (9) please.":goto 310
+320 if m(i)=0 then print:print"that multiplier isn't available.":goto 310
+330 print:print"ok,";c(c);"*";i;"equals";c(c)*i
+340 n=n+c(c)*i:m(i)=0:print:print"your sum is now";n:if c=9 then 360
+350 for i=1 to 1000:next i:goto 230
+360 print:print"that's the end of the game."
+370 if n=330 then print:print"well done, you got 330!":goto 390
+380 print:print"your final sum is";n
+390 print:print"would you like to play again (y/n)";
+400 input i$:if i$<>"y" and i$<>"n" then print:print"(y) or (n) please.":goto 400
+410 if i$="y" then 210
