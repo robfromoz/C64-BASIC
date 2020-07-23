@@ -1,0 +1,61 @@
+10 rem stay even r vonk 20150610
+20 rem from "the pocket calculator game book #2" by e schlossberg and
+30 rem j brockman, p.35
+40 print"“":print"this game is called 'stay even'."
+50 print:print"the game board is as follows. write it"
+60 print"down for future reference:"
+70 print:print"start"
+80 print" (1) > 3 > 5 > 3 > 15 > 9 > 3 > 7 > 5"
+90 print:print"                                    v"
+100 print:print"1.75 < 23 < 7.5 < 5 < 3 < 1.15 < 5.25"
+110 print:print"v"
+120 print:print"7 > 49 > 15 > 5 > 17 > 51 > 1.25 > .5
+130 print:print"                                    v"
+140 print:print"                              (1) < 5"
+150 print"                            finish"
+160 print:print:print"                              hit a key"
+170 get i$:if i$="" then 170
+180 print"“":print"the object is to go from the start"
+190 print"number (1) to the finish number (1)"
+200 print"using the numbers on the board in"
+210 print"sequence and having the running total"
+220 print"remain even throughout the entire"
+230 print"process."
+240 print:print"starting with the number 1, use the"
+250 print"number in the first space (3) with any"
+260 print"operation (+-*/). the result must be an"
+270 print"even number, which, when used in an"
+280 print"operation with the second number (5),"
+290 print"results in another even number. after"
+300 print"using all the numbers on the board in"
+310 print"sequence, and keeping your total even,"
+320 print"the result must be 1."
+330 for i=1 to 6:print:next i:print"                              hit a key"
+340 get i$:if i$="" then 340
+350 data 3,5,3,15,9,3,7,5,5.25,1.15,3,5,7.5,23,1.75,7,49,15,5,17,51,1.25,.5,5
+360 dim b(24)
+370 for i=1 to 24:read b(i):next i
+380 n=1:t=1
+390 print"“":print"your total is";n
+400 print:print"you are";25-t;"space(s) from the finish."
+410 if t=24 then print:print"you must get 1 to win"
+420 print:print"your next number to use is";b(t)
+430 print:print"choose an operation (+-*/)";
+440 input o$
+450 if o$<>"+" and o$<>"-" and o$<>"*" and o$<>"/" then print"(+-*/)@please.":goto 440
+460 print:print"ok,";n;o$;b(t);"equals";
+470 if o$="+" then n=n+b(t)
+480 if o$="-" then n=n-b(t)
+490 if o$="*" then n=n*b(t)
+500 if o$="/" then n=n/b(t)
+510 print n:if n/2<>int(n/2) then 560
+520 if t=24 then 570
+530 print:print"an even number, so you advance to the"
+540 print"next space.":t=t+1
+550 for i=1 to 2000:next i:goto 390
+560 print:print"you got an odd number. you lose.":goto 590
+570 if n=1 then print:print"you got a 1. you win the game!":goto 590
+580 print:print"you didn't get a 1. sorry, you lose."
+590 print:print"do you want another game (y/n)";
+600 input i$:if i$<>"y" and i$<>"n" then print:print"(y) or (n) please.":goto 600
+610 if i$="y" then 380

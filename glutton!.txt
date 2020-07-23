@@ -1,0 +1,155 @@
+10 rem glutton! r vonk 2020
+20 rem based on 'greed', a game by f smith and m day
+30 z=rnd(-ti):poke 53280,0:poke 53281,0:poke 646,1
+40 print"“":print"this game is called 'glutton!'"
+50 print:print"in this game, you eat as much as you"
+60 print"can before munching yourself into a"
+70 print"corner."
+80 print:print"when you move in a direction, you erase"
+90 print"n grid squares in that direction, n"
+100 print"being the first number in that"
+110 print"direction and your score for the move."
+120 print"you cannot move onto a space you've"
+130 print"already eaten, and the game ends when"
+140 print"you cannot move."
+150 print:print"use the following keys to move:"
+160 print:print"                q w e"
+170 print:print"                a   d"
+180 print:print"                z x c"
+190 print:print"                              hit a key"
+200 get i$:if i$<>"" then 200
+210 get i$:if i$="" then 210
+220 print"“":print"please wait, setting up the board."
+230 dim b$(20,39)
+240 for i=1 to 20:for j=1 to 39:b$(i,j)=chr$(48+int(rnd(1)*9+1)):next j:next i
+250 p$="@":x=19:y=10:b$(y,x)=p$:s=0:t=0:h=0:l=0
+260 print"“":for i=1 to 20:for j=1 to 39:print b$(i,j);:next j:print:next i
+270 if l=8 then 1510
+280 print:print"score:";s;int(t/780*10000+.5)/100;"%";tab(31);"glutton!"
+290 get i$:if i$<>"" then 290
+300 get i$:if i$="" then 300
+310 if i$="w" or i$="x" or i$="a" or i$="d" then 350
+320 if i$="q" or i$="c" or i$="e" or i$="z" then 670
+330 goto 300
+340 rem *** up **
+350 if i$<>"w" then 430
+360 if y=1 or (y>1 and b$(y-1,x)=" ") then 300
+370 b=val(b$(y-1,x)):if y-b<1 then 300
+380 f=0:for i=y to y-b step -1:if b$(i,x)=" " then f=1
+390 next i:if f=1 then 300
+400 b$(y,x)=" ":for i=y to y-b step -1:s=s+val(b$(i,x)):t=t+1:b$(i,x)=" "
+410 next i:y=i+1:b$(y,x)=p$:goto 1030
+420 rem *** down ***
+430 if i$<>"x" then 510
+440 if y=20 or (y<20 and b$(y+1,x)=" ") then 300
+450 b=val(b$(y+1,x)):if y+b>20 then 300
+460 f=0:for i=y to y+b:if b$(i,x)=" " then f=1
+470 next i:if f=1 then 300
+480 b$(y,x)=" ":for i=y to y+b:s=s+val(b$(i,x)):t=t+1:b$(i,x)=" "
+490 next i:y=i-1:b$(y,x)=p$:goto 1030
+500 rem *** left ***
+510 if i$<>"a" then 590
+520 if x=1 or (x>1 and b$(y,x-1)=" ") then 300
+530 b=val(b$(y,x-1)):if x-b<1 then 300
+540 f=0:for i=x to x-b step -1:if b$(y,i)=" " then f=1
+550 next i:if f=1 then 300
+560 b$(y,x)=" ":for i=x to x-b step -1:s=s+val(b$(y,i)):t=t+1:b$(y,i)=" "
+570 next i:x=i+1:b$(y,x)=p$:goto 1030
+580 rem *** right ***
+590 if x=39 or (x<39 and b$(y,x+1)=" ") then 300
+600 b=val(b$(y,x+1)):if x+b>39 then 300
+610 f=0:for i=x to x+b:if b$(y,i)=" " then f=1
+620 next i:if f=1 then 300
+630 b$(y,x)=" ":for i=x to x+b:s=s+val(b$(y,i)):t=t+1:b$(y,i)=" "
+640 next i:x=i-1:b$(y,x)=p$:goto 1030
+650 rem *** diagonal directions ***
+660 rem *** up and left ***
+670 if i$<>"q" then 760
+680 if x=1 or y=1 then 300
+690 if (x>1 or y>1) and b$(y-1,x-1)=" " then 300
+700 b=val(b$(y-1,x-1)):if y-b<1 or x-b<1 then 300
+710 xx=x+1:f=0:for i=y to y-b step -1:xx=xx-1:if b$(i,xx)=" " then f=1
+720 next i:if f=1 then 300
+730 b$(y,x)=" ":x=x+1:for i=y to y-b step -1:x=x-1:s=s+val(b$(i,x)):t=t+1
+740 b$(i,x)=" ":next i:y=i+1:b$(y,x)=p$:goto 1030
+750 rem *** down and right ***
+760 if i$<>"c" then 850
+770 if x=39 or y=20 then 300
+780 if (x<39 or y<20) and b$(y+1,x+1)=" " then 300
+790 b=val(b$(y+1,x+1)):if y+b>20 or x+b>39 then 300
+800 xx=x-1:f=0:for i=y to y+b:xx=xx+1:if b$(i,xx)=" " then f=1
+810 next i:if f=1 then 300
+820 b$(y,x)=" ":x=x-1:for i=y to y+b:x=x+1:s=s+val(b$(i,x)):t=t+1
+830 b$(i,x)=" ":next i:y=i-1:b$(y,x)=p$:goto 1030
+840 rem *** up and right ***
+850 if i$<>"e" then 940
+860 if x=39 or y=1 then 300
+870 if (x<39 or y>1) and b$(y-1,x+1)=" " then 300
+880 b=val(b$(y-1,x+1)):if y-b<1 or x+b>39 then 300
+890 xx=x-1:f=0:for i=y to y-b step -1:xx=xx+1:if b$(i,xx)=" " then f=1
+900 next i:if f=1 then 300
+910 b$(y,x)=" ":x=x-1:for i=y to y-b step -1:x=x+1:s=s+val(b$(i,x)):t=t+1
+920 b$(i,x)=" ":next i:y=i+1:b$(y,x)=p$:goto 1030
+930 rem *** down and left ***
+940 if x=1 or y=20 then 300
+950 if (x>1 or y<20) and b$(y+1,x-1)=" " then 300
+960 b=val(b$(y+1,x-1)):if y+b>20 or x-b<1 then 300
+970 xx=x+1:for i=y to y+b:xx=xx-1:if b$(i,xx)=" " then f=1
+980 next i:if f=1 then 300
+990 b$(y,x)=" ":x=x+1:for i=y to y+b:x=x-1:s=s+val(b$(i,x)):t=t+1
+1000 b$(i,x)=" ":next i:y=i-1:b$(y,x)=p$:goto 1030
+1010 rem *** check for loss ***
+1020 rem *** can't go up? ***
+1030 l=0:if y=1 then l=l+1:goto 1090
+1040 if y>1 and b$(y-1,x)=" " then l=l+1:goto 1090
+1050 b=val(b$(y-1,x)):if y-b<1 then l=l+1:goto 1090
+1060 f=0:for i=y to y-b step -1:if b$(i,x)=" " then f=1
+1070 next i:if f=1 then l=l+1
+1080 rem *** or down? ***
+1090 if y=20 then l=l+1:goto 1150
+1100 if y<20 and b$(y+1,x)=" " then l=l+1:goto 1150
+1110 b=val(b$(y+1,x)):if y+b>20 then l=l+1:goto 1150
+1120 f=0:for i=y to y+b:if b$(i,x)=" " then f=1
+1130 next i:if f=1 then l=l+1
+1140 rem *** or left? ***
+1150 if x=1 then l=l+1:goto 1210
+1160 if x>1 and b$(y,x-1)=" " then l=l+1:goto 1210
+1170 b=val(b$(y,x-1)):if x-b<1 then l=l+1:goto 1210
+1180 f=0:for i=x to x-b step -1:if b$(y,i)=" " then f=1
+1190 next i:if f=1 then l=l+1
+1200 rem *** or right? ***
+1210 if x=39 then l=l+1:goto 1270
+1220 if x<39 and b$(y,x+1)=" " then l=l+1:goto 1270
+1230 b=val(b$(y,x+1)):if x+b>39 then l=l+1:goto 1270
+1240 f=0:for i=x to x+b:if b$(y,i)=" " then f=1
+1250 next i:if f=1 then l=l+1
+1260 rem *** or up and left? ***
+1270 if x=1 or y=1 then l=l+1:goto 1330
+1280 if (x>1 or y>1) and b$(y-1,x-1)=" " then l=l+1:goto 1330
+1290 b=val(b$(y-1,x-1)):if y-b<1 or x-b<1 then l=l+1:goto 1330
+1300 xx=x+1:f=0:for i=y to y-b step -1:xx=xx-1:if b$(i,xx)=" " then f=1
+1310 next i:if f=1 then l=l+1
+1320 rem *** or down and right? ***
+1330 if x=39 or y=20 then l=l+1:goto 1390
+1340 if (x<39 or y<20) and b$(y+1,x+1)=" " then l=l+1:goto 1390
+1350 b=val(b$(y+1,x+1)):if y+b>20 or x+b>39 then l=l+1:goto 1390
+1360 xx=x-1:f=0:for i=y to y+b:xx=xx+1:if b$(i,xx)=" " then f=1
+1370 next i:if f=1 then l=l+1
+1380 rem *** or up and right? ***
+1390 if x=39 or y=1 then l=l+1:goto 1450
+1400 if (x<39 or y>1) and b$(y-1,x+1)=" " then l=l+1:goto 1450
+1410 b=val(b$(y-1,x+1)):if y-b<1 or x+b>39 then l=l+1:goto 1450
+1420 xx=x-1:f=0:for i=y to y-b step -1:xx=xx+1:if b$(i,xx)=" " then f=1
+1430 next i:if f=1 then l=l+1
+1440 rem *** or down and left? ***
+1450 if x=1 or y=20 then l=l+1:goto 1500
+1460 if (x>1 or y<20) and b$(y+1,x-1)=" " then l=l+1:goto 1500
+1470 b=val(b$(y+1,x-1)):if y+b>20 or x-b<1 then l=l+1:goto 1500
+1480 xx=x+1:for i=y to y+b:xx=xx-1:if b$(i,xx)=" " then f=1
+1490 next i:if f=1 then l=l+1
+1500 goto 260
+1510 print:print"game over. your score is";s
+1520 print"you cleared";int(t/780*10000+.5)/100;"%. play again? (y/n)"
+1530 get i$:if i$<>"" then 1530
+1540 get i$:if i$<>"y" and i$<>"n" then 1540
+1550 if i$="y" then 240
