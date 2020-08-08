@@ -1,0 +1,160 @@
+10 rem solitaire dice r vonk 2020
+20 rem from "a gamut of games" by s sackson, 1969, p 169
+30 z=rnd(-ti):print"“":poke 53280,3:poke 53281,1:poke 646,0
+40 print:print"the object is to score the most points"
+50 print"possible. 500 points is considered a"
+60 print"winning score."
+70 print:print"your scoresheet is as follows:"
+80 print:print"scoring                   rejects"
+90 print:print" 2  (100) -"
+100 print" 3  ( 70) -"
+110 print" 4  ( 60) -"
+120 print" 5  ( 50) -                1 -"
+130 print" 6  ( 40) -                2 -"
+140 print" 7  ( 30) -                3 -"
+150 print" 8  ( 40) -                4 -"
+160 print" 9  ( 50) -                5 -"
+170 print" 10 ( 60) -                6 -"
+180 print" 11 ( 70) -"
+190 print" 12 (100) -"
+200 print:print"                              hit a key"
+210 get i$:if i$="" then 210
+220 print"“":print"the numbers 2-12 on the left are your"
+230 print"scoring numbers that you roll with"
+240 print"two dice. the numbers in parentheses is"
+250 print"the amount you score each time you roll"
+260 print"that number. e.g. each time you roll a"
+270 print"2, you score 100 points; each time you"
+280 print"roll a 7, you score 30 points."
+290 print:print"the numbers 1-6 on the right are your"
+300 print"reject dice. you can choose up to three"
+310 print"reject dice in a game. the game ends"
+320 print"when you roll one reject die eight"
+330 print"times."
+340 print:print"the play:"
+350 print"roll all five dice. group four of them"
+360 print"in two pairs. these are your two"
+370 print"scores. the remaining die is your"
+380 print"reject die."
+390 print:print"for example, you roll 1 1 3 5 6."
+400 print:print"                              hit a key"
+410 get i$:if i$="" then 410
+420 print"“":print"you decide to group the dice as"
+430 print"follows:"
+440 print:print"1 5 -- place a mark next to 6 in the"
+450 print"         scoring section."
+460 print"1 6 -- place a mark next to 7 in the"
+470 print"       scoring section."
+480 print"3   -- place a mark next to 3 in the"
+490 print"       reject section."
+500 print:print"keep rolling until one of your three"
+510 print"reject dice has eight marks, then your"
+520 print"score will be calculated."
+530 print:print"you must divide up your dice so that"
+540 print"you use one of them as a reject die."
+550 print"the only exception is when you have"
+560 print"selected three reject dice and your"
+570 print"roll does not include any of them. for"
+580 print"example, you roll 1 1 2 2 3 and you"
+590 print"have already marked the reject dice 4,"
+600 print"5 and 6."
+610 print"                              hit a key"
+620 get i$:if i$="" then 620
+630 print"“":print"in this case, you score as usual and"
+640 print"throw away the die of your choice for"
+650 print"free."
+660 print:print"the scoring catch:"
+670 print"the first four marks you make for any"
+680 print"scoring die count as -200 to your"
+690 print"score. the fifth time you roll it, your"
+700 print"score for that die goes to 0. it is not"
+710 print"until the sixth time you roll a number"
+720 print"that you score the value in the"
+730 print"parentheses. marks 6-10 score that"
+740 print"value. marks after 10 do not add to"
+750 print"your score."
+760 for i=1 to 8:print:next i:print"                              hit a key"
+770 get i$:if i$="" then 770
+780 print"“":print"for example, your scoresheet looks like"
+790 print"this:"
+800 print:print" 2  (100) -"
+810 print" 3  ( 70) - ii"
+820 print" 4  ( 60) -"
+830 print" 5  ( 50) - iiiiiii        1 - iiiiii"
+840 print" 6  ( 40) -                2 - iiii"
+850 print" 7  ( 30) - iiiiiiii       3 -"
+860 print" 8  ( 40) - iiii           4 -"
+870 print" 9  ( 50) - iiiii          5 - iii"
+880 print" 10 ( 60) -                6 -"
+890 print" 11 ( 70) -"
+900 print" 12 (100) -"
+910 print:print"in this example, the player has a score"
+920 print"of -200."
+930 for i=1 to 5:print:next i:print"                              hit a key"
+940 get i$:if i$="" then 940
+950 print"“":print"the player's score is calculated as"
+960 print"follows:"
+970 print:print"two rolls of 3               = -200"
+980 print"seven rolls of 5  50 * (7-5) = +100"
+990 print"eight rolls of 7  30 * (8-5) = + 90"
+1000 print"four rolls of 8              = -200"
+1010 print"five rolls of 9              =    0"
+1020 print"                                 --"
+1030 print"                               -210"
+1040 print:print"the player would be advised to try to"
+1050 print"use combinations that will result in 5"
+1060 print"and 2 being used as the reject die. if"
+1070 print"the player uses the number 1 two more"
+1080 print"times, the game will end. the player"
+1090 print"can use 5 and 2 three and four times"
+1100 print"respectively without ending the game."
+1110 print"the player should also try to score at"
+1120 print"least one more 8. (scoring three 3's"
+1130 print"would also be nice but perhaps not"
+1140 print"possible). the next 8 will remove the"
+1150 print"-200 penalty.                hit a key."
+1160 get i$:if i$="" then 1160
+1170 data "100"," 70"," 60"," 50"," 40"," 30"," 40"," 50"," 60"," 70","100"
+1180 dim b(11),b$(11),d(5),d1(5),t(6)
+1190 for i=1 to 11:read b$(i):next i
+1200 for i=1 to 11:b(i)=0:next i:for i=1 to 6:t(i)=0:next i:s=0:e=0
+1210 print"“":print"scoring";tab(26);"rejects":print
+1220 for i=1 to 11:print i+1;tab(4);"(";b$(i);") - ";:if b(i)=0 then 1240
+1230 for j=1 to b(i):print"i";:next j
+1240 if i<4 or i>9 then print:goto 1270
+1250 print tab(26);i-3;"- ";:if t(i-3)=0 then print:goto 1270
+1260 for j=1 to t(i-3):print"i";:next j:print
+1270 next i:if e=1 then 1550
+1280 print:print"your score is:";s
+1290 print:print"hit a key to roll the dice."
+1300 get i$:if i$<>"" then 1300
+1310 get i$:if i$="" then 1310
+1320 print:print"rolling...";:for i=1 to 5:d(i)=int(rnd(1)*6+1):next i
+1330 for i=1 to 1000:next i:print"you rolled";d(1);d(2);d(3);d(4);d(5):print
+1340 for i=1 to 5:d1(i)=0:next i
+1350 input"your numbers for pair #1";a,b
+1360 for i=1 to 5:if a=d(i) then d1(i)=1:goto 1380
+1370 next i:print"number";a;"is unavailable.":goto 1340
+1380 for i=1 to 5:if b=d(i) and d1(i)=0 then d1(i)=1:goto 1400
+1390 next i:print"number";b;"is unavailable.":goto 1340
+1400 input"your numbers for pair #2";c,d
+1410 for i=1 to 5:if c=d(i) and d1(i)=0 then d1(i)=1:goto 1430
+1420 next i:print"number";c;"is unavailable.":goto 1340
+1430 for i=1 to 5:if d=d(i) and d1(i)=0 then d1(i)=1:goto 1450
+1440 next i:print"number";d;"is unavailable.":goto 1340
+1450 for i=1 to 5:if d1(i)=0 then t=d(i)
+1460 next i:print"the reject is";t
+1470 b((a+b)-1)=b((a+b)-1)+1:b((c+d)-1)=b((c+d)-1)+1
+1480 s=0:for i=1 to 11:if b(i)>0 and b(i)<5 then s=s-200:goto 1510
+1490 if b(i)>10 then s=s+((b(i)-5-(b(i)-10)))*val(b$(i)):goto 1510
+1500 if b(i)>4 then s=s+(b(i)-5)*val(b$(i))
+1510 next i:f=0:for i=1 to 6:if t(i)>0 then f=f+1
+1520 next i:if f=3 and t(t)=0 then 1540
+1530 t(t)=t(t)+1:if t(t)=8 then e=1
+1540 for i=1 to 1000:next i:goto 1210
+1550 print:print"that's the end of the game."
+1560 print:print"you finished with a score of";s
+1570 if s>=500 then print:print"well done!!!"
+1580 print:print"play again? (y/n)";
+1590 input i$:if i$<>"y" and i$<>"n" then print:print"y/n please.":goto 1590
+1600 if i$="y" then 1200
