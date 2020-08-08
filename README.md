@@ -1,7 +1,7 @@
 # C64-BASIC
 Commodore BASIC programs that I have written over the years.
 
-I have provided these programs in both ASCII format, so you can examine the code (if you really want to!) and PRG format so that you can run them on your favourite emulator.
+I have provided these programs in both ASCII format, so you can examine the code (if you really want to!) and PRG format so that you can run them on your favourite emulator (again, if you really want to!)
 
 I have deliberately designed these programs so that they can be ported with little effort onto computers such as Apple II, TRS-80, BBC Micro, and other systems that have BASIC interpreters.
 
