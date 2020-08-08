@@ -1,0 +1,49 @@
+10 rem change change by r vonk 2020
+20 rem from "a gamut of games" by s sackson, 1969, p 185
+30 data " 1c"," 1c"," 1c"," 1c"," 5c"," 5c","10c","10c","10c","10c","25c"," x "
+40 print"“":print"this game is called 'change change'."
+50 print:print"in this game you have eleven coins."
+60 print"the object is to arrange them into a"
+70 print"symmetrical position by sliding them"
+80 print"one at a time into an empty space. a"
+90 print"symmetrical position is one which is"
+100 print"balanced around the middle row. in"
+110 print"other words, if there is a 1c in the"
+120 print"top row, there must be a 1c directly"
+130 print"below it in the bottom row. the 25c"
+140 print"coin and the empty space, since there"
+150 print"is only one of each, must always end"
+160 print"up in the middle row."
+170 for i=1 to 8:print:next i:print"                              hit a key"
+180 get i$:if i$="" then 180
+190 data "1c","1c","1c"," 1c","5c","5c","10c","10c","10c","10c","25c"," x "
+200 dim c$(3,4):for i=1 to 3:for j=1 to 4:read c$(i,j):next j:next i
+210 t=0:for i=1 to 3:for j=1 to 4:a=int(rnd(1)*3+1):b=int(rnd(1)*4+1)
+220 t$=c$(i,j):c$(i,j)=c$(a,b):c$(a,b)=t$:next j:next i
+230 f=0:for i=1 to 4:if c$(1,i)=c$(3,i) then f=f+1
+240 next i:if f=4 then 210
+250 print"“":print tab(12);"change change":print:print
+260 for i=1 to 3:print tab(11);:for j=1 to 4:print c$(i,j);" ";
+270 next j:print:print:next i:print:print tab(11);" a   b   c   d"
+280 print:print tab(11);" e   f   g   h":print:print tab(11);" i   j   k   l"
+290 f=0:for i=1 to 4:if c$(1,i)=c$(3,i) then f=f+1
+300 next i:if f=4 then 460
+310 print:print:print tab(14);"turns:";t
+320 get i$:if i$<>"" then 320
+330 get i$:if i$<"a" or i$>"l" then 330
+340 a=1:if i$>"d" and i$<"i" then a=2
+350 if i$>"h" then a=3
+360 b=asc(i$)-64-((a-1)*4):if a=1 then 380
+370 if c$(a-1,b)=" x " then t$=c$(a-1,b):c$(a-1,b)=c$(a,b):c$(a,b)=t$:goto 450
+380 if b=4 then 400
+390 if c$(a,b+1)=" x " then t$=c$(a,b+1):c$(a,b+1)=c$(a,b):c$(a,b)=t$:goto 450
+400 if a=3 then 420
+410 if c$(a+1,b)=" x " then t$=c$(a+1,b):c$(a+1,b)=c$(a,b):c$(a,b)=t$:goto 450
+420 if b=1 then 440
+430 if c$(a,b-1)=" x " then t$=c$(a,b-1):c$(a,b-1)=c$(a,b):c$(a,b)=t$:goto 450
+440 print:print:print tab(13);"invalid move":for i=1 to 1000:next i
+450 t=t+1:goto 250
+460 print:print:print tab(6);"you solved it in";t;"turns!"
+470 print:print tab(7);"another game (y/n)";
+480 input i$:if i$<>"y" and i$<>"n" then print:print"(y/n) please.":goto 480
+490 if i$="y" then 210
