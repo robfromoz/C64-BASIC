@@ -1,0 +1,154 @@
+10 rem terror town rob vonk 2022
+20 rem based on a rpg written by errin famiglia and ronald pehr 2006
+30 rem https://boardgamegeek.com/boardgame/320921/terror-town-rpg
+40 poke 53280,0:poke 53281,0:poke 646,1
+50 print"“":print"you take the role of a person trapped"
+60 print"in the evil terror town, a ghost town"
+70 print"whose legend claims a corrupt mayor"
+80 print"sacrificed the souls of his entire town"
+90 print"in order to gain power and eternal life"
+100 print"in a dark dimension of pure evil."
+110 print:print"the town exists in three different"
+120 print"worlds at once: our world, grey world,"
+130 print"and dark world. in our world, you will"
+140 print"find weapons and other useful items."
+150 print"in dark world, you will find twisted"
+160 print"monsters out to kill you. in grey"
+170 print"world, you will find both."
+180 print:print"can you survive the survival horror"
+190 print"challenge of terror town? will you"
+200 print"escape the doomed town, defeat its"
+210 print"diabolical mayor, or just end up"
+220 print"falling victim to its many monsters?"
+230 print"the answer awaits you...in terror town."
+240 print:print"hit a key."
+250 get i$:if i$="" then 250
+260 z=rnd(-ti):def fnr(x)=int(rnd(1)*x+1)
+270 wo=1:we$=" knife":sh=1:da=3:ke=0
+280 es=fnr(6)+6:li=fnr(6)+fnr(6)+12:sl=li
+290 print"“":print"you start this adventure in our world."
+300 print:print"***************************************"
+310 print:print"escape points";es
+320 print"life points";li
+330 if ke>0 then print"city keys";ke
+340 print"you are armed with a";we$;"."
+350 print:print"you are in ";
+360 if wo=1 then print"our world.":goto 390
+370 if wo=2 then print"grey world.":goto 730
+380 print"dark world.":goto 780
+390 print:print"hit a key to search the town for items."
+400 get i$:if i$<>"" then 400
+410 get i$:if i$="" then 410
+420 print:print"you find a";
+430 ro=fnr(6)+fnr(6)
+440 if ro=2 then print" city key!":ke=ke+1
+450 if ro=3 then print" crossbow!":we$=" crossbow":sh=3:da=fnr(6)+6
+460 if ro=4 then print" magnum!":we$=" magnum":sh=6:da=fnr(6)+2
+470 if ro=5 then print" shotgun!":we$=" shotgun":sh=4:da=fnr(6)+4
+480 if ro=6 then print" revolver!":we$=" revolver":sh=6:da=fnr(6)+1
+490 if ro=7 then print" med kit!":li=li+fnr(6)+fnr(6):if li>sl then li=sl
+500 if ro=8 then print" pistol!":we$=" pistol":sh=8:da=fnr(6)
+510 if ro=9 then print" rifle!":we$=" rifle":sh=4:da=fnr(6)+3
+520 if ro=10 then print"n uzi!":we$="n uzi":sh=12:da=fnr(6)+1
+530 if ro=11 then print" grenade!":we$=" grenade":sh=1:da=fnr(6)+fnr(6)+6
+540 if ro=12 and wo=2 then 430
+550 if ro<>12 then 600
+560 print" power portal!":if fnr(6)>ke then 580
+570 print:print"you use the portal to escape the city!":end
+580 print:print"however, you don't have enough keys to"
+590 print"activate it.":goto 610
+600 if ro<>2 and ro<>7 then print"it can deal";da;"damage."
+610 print:print"hit a key to continue your quest."
+620 get i$:if i$<>"" then 620
+630 get i$:if i$="" then 630
+640 ro=fnr(6)+fnr(6):if ro<>2 and ro<>7 and ro<>12 then 300
+650 ro=fnr(6):if wo<>1 then 680
+660 if ro<5 then wo=2:goto 300
+670 wo=3:goto 300
+680 if wo<>2 then 710
+690 if ro<4 then wo=1:goto 300
+700 wo=3:goto 300
+710 if ro<5 then wo=2:goto 300
+720 wo=1:goto 300
+730 print:print"what will you find here?"
+740 print"hit a key to find out."
+750 get i$:if i$<>"" then 750
+760 get i$:if i$="" then 760
+770 ro=fnr(6):if ro<4 then 420
+780 mo=fnr(6)+fnr(6):print:print"look out!":print
+790 if mo=2 then print"a giant tentacle";:mo$="the giant tentacle"
+800 if mo=2 then ec=12:ea=0:el=36:ed=fnr(6)+fnr(6)+3
+810 if mo=3 then print"a leech cloud";:mo$="the leech cloud"
+820 if mo=3 then ec=10:ea=5:el=9:ed=fnr(6)+fnr(6)+1
+830 if mo=4 then print"a vampleweed";:mo$="the vampleweed"
+840 if mo=4 then ec=9:ea=3:el=15:ed=fnr(6)+5
+850 if mo=5 then print"a chompbox";:mo$="the chompbox"
+860 if mo=5 then ec=6:ea=4:el=13:ed=fnr(6)+4
+870 if mo=6 then print"a beekeeper";:mo$="the beekeeper"
+880 if mo=6 then ec=8:ea=2:el=16:ed=fnr(6)+1
+890 if mo=7 then print"a drooler";:mo$="the drooler"
+900 if mo=7 then ec=7:ea=1:el=12:ed=fnr(6)
+910 if mo=8 then print"tall sally";:mo$="tall sally"
+920 if mo=8 then ec=9:ea=2:el=14:ed=fnr(6)+2
+930 if mo=9 then print"a killboard";:mo$="the killboard"
+940 if mo=9 then ec=6:ea=1:el=27:ed=fnr(6)+3
+950 if mo=10 then print"a threettin";:mo$="the threettin"
+960 if mo=10 then ec=8:ea=3:el=18:ed=fnr(6)+6
+970 if mo=11 then print"a wormface";:mo$="the wormface"
+980 if mo=11 then ec=7:ea=4:el=21:ed=fnr(6)+fnr(6)
+990 if mo=12 then print"the dark mayor";:mo$="the dark mayor"
+1000 if mo=12 then ec=11:ea=6:el=24:ed=fnr(6)+fnr(6)+2
+1010 print" is here!":print:print mo$;"'s stats:"
+1020 print"chase";ec;"armour";ea;"life";el;"damage";ed
+1030 print:print"do you wish to (1) flee or (2) fight";
+1040 input in:if in<>1 and in<>2 then print:print"(1) or (2) please.":goto 1040
+1050 if in=2 then 1180
+1060 print:print"you attempt to flee ";mo$;"..."
+1070 for i=1 to 1000:next i:r1=fnr(6)+fnr(6):if r1>=es then 1090
+1080 print"you succeed!":for i=1 to 1000:next i:goto 1100
+1090 print"you fail though.":for i=1 to 1000:next i
+1100 print:print mo$;" gives chase...":for i=1 to 1000:next i
+1110 r2=fnr(6)+fnr(6):if r2<ec then 1130
+1120 print mo$;" fails to catch you!":goto 1140
+1130 print mo$;" catches you!"
+1140 if r1>=es and r2<ec then 1170
+1150 if (r1>=es and r2>=ec) or (r1<es and r2<ec) then 1030
+1160 print"you escape ";mo$;"'s clutches!":goto 610
+1170 print"you must fight ";mo$;"!"
+1180 print:print"you have";sh;"shot";:if sh>1 then print"s ";:goto 1200
+1190 print" ";
+1200 print"left of your";
+1210 if right$(we$,3)="uzi" then print" uzi.":goto 1230
+1220 print we$;"."
+1230 print:print mo$;" has";el;"life point";:if el<>1 then print"s";:goto 1240
+1240 print".":print"you have";li
+1250 print:print"how many shots do you wish to take";
+1260 input in
+1270 if in<1 then print:print"you must take at least one shot!":goto 1260
+1280 if in>sh then print:print"you don't have that many shots!":goto 1260
+1290 for i=1 to in:if right$(we$,3)<>"ife" then sh=sh-1
+1300 print:print"you attack ";mo$;"...":for j=1 to 1000:next j
+1310 ro=fnr(6):if ro<ea then 1360
+1320 print"you hit ";mo$;" for";da;"damage!":el=el-da
+1330 print mo$;" now has";el;"life point";:if el<>1 then print"s";:goto 1340
+1340 print".":if el<=0 then 1470
+1350 goto 1380
+1360 if rnd(1)>.5 then print"you miss!":goto 1380
+1370 print"your shot is ineffective!"
+1380 for j=1 to 1000:next j:print:print mo$;" attacks!":for j=1 to 1000:next j
+1390 li=li-ed:print"you now have";li;"life point";
+1400 if ll<>1 then print"s";:goto 1420
+1410 print" ";
+1420 print".":for j=1 to 1000:next j:if li<=0 then 1530
+1430 if sh>0 then 1460
+1440 print:print"you're out of shots, so you must fight"
+1450 print mo$;" with a knife!":we$=" knife":sh=1:da=3:for j=1 to 1000:next j
+1460 next i:goto 1030
+1470 if mo=12 then 1490
+1480 print:print"you have slain ";mo$;"!":goto 610
+1490 print:print"the dark mayor lies dead at your feet,"
+1500 print"his power over the town shattered."
+1510 print"never again will the townspeople suffer"
+1520 print"at the hands of such evil. well done!":end
+1530 print:print"you are dead. the dark mayor reigns"
+1540 print"supreme over the town!"
