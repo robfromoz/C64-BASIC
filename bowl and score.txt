@@ -1,0 +1,66 @@
+10 rem bowl and score by rob vonk 2020
+20 rem based on dice game of same name by e.s. lowe, 1962
+30 rem scoring routine by paul dunn
+40 print"“":poke 53280,0:poke 53281,0:poke 646,1
+50 print"this game is called 'bowl and score'."
+60 print:print"this game consists of ten regular dice"
+70 print"with a picture of a bowling pin on one"
+80 print"side (denoted by 'o') and blanks on the"
+90 print"other five (denoted by '-'). the player"
+100 print"rolls all the dice. any blanks are set"
+110 print"aside and represent the number of pins"
+120 print"knocked down with the first ball. the"
+130 print"remaining dice are rolled and scored"
+140 print"the same way. this represents one"
+150 print"frame. this continues for ten frames."
+160 print"score is figured just like regular"
+170 print"bowling."
+180 print:print"hit a key"
+190 get i$:if i$<>"" then 190
+200 get i$:if i$="" then 200
+210 print"“":dim p(10),s(21):poke 53280,0:poke 53281,0:poke 646,1:z=rnd(-ti)
+220 for i=1 to 21:s(i)=0:next i
+230 for f=1 to 10:b=1:s=0:gosub 460:gosub 490
+240 gosub 610:print:print tab(8);"frame";f;"ball";b;"score";sc
+250 print:print tab(11);"hit a key to bowl"
+260 get i$:if i$<>"" then 260
+270 get i$:if i$="" then 270
+280 gosub 580:gosub 480:s=s+p:s(f*2-2+b)=p:if f=10 then 330
+290 if b=2 or (s=10 and b=1) then 410
+300 b=b+1:goto 240
+310 rem bonus ball routine for 10th frame
+320 rem if strike on first ball, two more balls
+330 if b=1 and s=10 then print tab(13);"bowl two more!"
+340 if b=1 and s=10 then s=0:gosub 460:gosub 480:goto 300
+350 rem if strike or spare on second ball, one more ball
+360 if b=2 and s(19)=10 and s(20)<10 then print tab(13);"bowl one more!":s=0
+370 if b=2 and s(19)=10 and s(20)<10 then 300
+380 if b=2 and (s(19)=10 or s(19)+s(20)=10) then print tab(13);"bowl one more!"
+390 if b=2 and (s(19)=10 or s(19)+s(20)=10) then s=0:gosub 460:gosub 480:goto 300
+400 if b=1 then 300
+410 next f:gosub 610:print:print tab(9);"your final score is";sc
+420 print:print"another game (y/n)";
+430 input i$:if i$<>"y" and i$<>"n" then print"y or n please.":goto 430
+440 if i$="y" then 220
+450 end
+460 rem set up pins
+470 for i=1 to 10:p(i)=1:next i:return
+480 rem display pins
+490 print:print tab(17);:for i=7 to 10:if p(i)=1 then print"o ";:goto 510
+500 print"- ";
+510 next i:print:print tab(18);:for i=4 to 6:if p(i)=1 then print"o ";:goto 530
+520 print"- ";
+530 next i:print:print tab(19);:for i=2 to 3:if p(i)=1 then print"o ";:goto 550
+540 print"- ";
+550 next i:print:print tab(20);:if p(1)=1 then print"o":goto 570
+560 print"-"
+570 print:return
+580 rem bowl ball
+590 p=0:for i=1 to 10:if int(rnd(1)*6+1)<6 and p(i)=1 then p(i)=0:p=p+1
+600 next i:return
+610 rem scoring calculator
+620 sc=0:for i=1 to 17 step 2:sc=sc+s(i)+s(i+1)
+630 if s(i)=10 then sc=sc+s(i+2)+s(i+3)+(s(i+4)*-(s(i+3)=0)):goto 660
+640 rem remove '-' if true is 1 on your computer instead of -1
+650 if s(i)+s(i+1)=10 then sc=sc+s(i+2)
+660 next i:sc=sc+s(19)+s(20)+s(21):return
