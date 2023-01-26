@@ -1,0 +1,120 @@
+10 rem test match by rob vonk 2022
+20 rem based on board game of same name by john sands 1955
+30 rem https://boardgamegeek.com/boardgame/18657/
+40 rem six ball overs used instead of original eight
+50 rem bowler spinner
+60 data full toss,googly,leg break,googly,short length,off break,full toss
+70 rem batter spinner
+80 data no ball,bumper,short length,leg break,1,2,lbw,3,5,4,bowled,4,caught,6,3
+90 dim d$(11),b$(11),t$(2),r(2,2):poke 53280,5:poke 53281,5:poke 646,1
+100 z=rnd(-ti):for i=1 to 11:read d$(i):next i:for i=1 to 11:read b$(i):next i
+110 print"{clear}":print"this game is called 'test match'."
+120 print:print"the bowler will reveal the type of"
+130 print"ball being bowled. the batter's score"
+140 print"will then appear, unless 'caught',"
+150 print"'bowled' or 'lbw' are given."
+160 print:print"the batter continues to bat until out,"
+170 print"when the second batter goes in. when"
+180 print"the 10th wicket has fallen the first"
+190 print"innings is finished, then the players"
+200 print"change over."
+210 print:print"after two innings each a match is"
+220 print"finished."
+230 print:print"when a batter plays a 'no ball' the"
+240 print"batter is entitled to any score made"
+250 print"and cannot be dismissed by 'caught',"
+260 print"'bowled' or 'lbw'."
+270 print:print"hit a key."
+280 get i$:if i$<>"" then 280
+290 get i$:if i$="" then 290
+300 print"{clear}":input"enter your team";t$(2)
+310 t$(1)="computer xi":print:print"you will be playing against my team,"
+320 print t$(1);".":print:print"now for the toss of the coin. you have"
+330 print"the call. (h)eads or (t)ails";
+340 input i$:if i$<>"h" and i$<>"t" then print:print"h/t please.":goto 340
+350 if i$="h" then i$="heads":goto 370
+360 i$="tails"
+370 print:print i$;" is the call...";:c=rnd(1):c$="heads":if c>.5 then c$="tails"
+380 for i=1 to 1000:next i:print"and ";c$;" it is.":t=1:if i$=c$ then t=2
+390 if i$=c$ then 440
+400 rem captains have statistically been 64% likely to bat first in test
+410 rem matches played since 1980, hence the .64
+420 print:print"i win the toss.":r=rnd(1):b$="bat":t=1:if r>.64 then b$="bowl":t=2
+430 print:print"my team will ";b$;" first.":goto 490
+440 print:print"you win the toss. do you want to bat"
+450 print"first (y/n)";
+460 input i$:if i$<>"y" and i$<>"n" then print:print"y/n please.":goto 460
+470 b$="bat":t=2:if i$="n" then b$="bowl":t=1
+480 print:print"your team will ";b$;" first."
+490 print:print"hit a key to begin the match."
+500 get i$:if i$<>"" then 500
+510 get i$:if i$="" then 510
+520 rem randomise bowler and batter spinners
+530 d=int(rnd(1)*11+1):b=int(rnd(1)*11+1)
+540 r(1,1)=0:r(1,2)=0:r(2,1)=0:r(2,2)=0:in=1
+550 r=0:w=0:n=0
+560 print"{clear}":print t$(t);" are";r;"for";w:if tg>0 then print:print"target";tg
+570 print:print tab(13);"1st inns";tab(23);"2nd inns"
+580 print t$(1);:if r(1,1)>0 then print tab(13);r(1,1);
+590 if r(1,2)>0 then print tab(23);r(1,2);
+600 print:print t$(2);:if r(2,1)>0 then print tab(13);r(2,1);
+610 if r(2,2)>0 then print tab(23);r(2,2);
+620 if t=2 then 670
+630 print:print:print"hit a key to bowl."
+640 get i$:if i$<>"" then 640
+650 get i$:if i$="" then 650
+660 print:print"you bowl ";:goto 690
+670 print:print:print"my bowler comes in to bowl...":for i=1 to 1000:next i
+680 print:print"it is ";
+690 n=n+1:d=d+n:if d>11 then d=d-11
+700 if d=6 then print"an ";:goto 720
+710 print"a ";
+720 print d$(d);".":if t=1 then 770
+730 print:print"hit a key to play a shot."
+740 get i$:if i$<>"" then 740
+750 get i$:if i$="" then 750
+760 goto 780
+770 print:print"my batter plays a shot...":for i=1 to 1000:next i
+780 if d=1 or d=7 then e=7
+790 if d=2 or d=4 then e=4
+800 if d=3 or d=11 then e=1
+810 if d=5 or d=10 then e=6
+820 if d=6 then e=3
+830 if d=8 then e=5
+840 if d=9 then e=2
+850 b=b+e:if b>11 then b=b-11
+860 if val(b$(b))>0 and t=1 then print:print"my batter scores ";:goto 890
+870 if val(b$(b))>0 and t=2 then print:print"your batter scores ";
+880 if val(b$(b))=0 then print
+890 print b$(b);:if val(b$(b))=1 then print" run.":goto 920
+900 if val(b$(b))>1 then print" runs.":goto 920
+910 print"."
+920 if (b=3 or b=7 or b=9) and d<>8 then 950
+930 r=r+val(b$(b))
+940 goto 960
+950 print:print t$(t);" lose a wicket!":w=w+1:if w=10 then 990
+960 print:print t$(t);" are now";r;"for";w:if n=6 then n=0
+970 if tg>0 and r>tg then 1000
+980 for i=1 to 2000:next i:goto 560
+990 print:print t$(t);" are all out for";r;"runs."
+1000 r(t,in)=r:f=0:for i=1 to 2:for j=1 to 2:if r(i,j)>0 then f=f+1
+1010 next j:next i:if f=4 then 1100:rem match over
+1020 if f=3 and r(t,1)+r(t,2)<r(3-t,1) then f=5:goto 1100:rem innings defeat
+1030 if f<3 then 1050
+1040 tg=r(t,1)+r(t,2)-r(3-t,1)+1:print:print t$(3-t);" need";tg;"to win."
+1050 t=3-t:if f=2 then in=in+1
+1060 print:print"hit a key to continue."
+1070 get i$:if i$<>"" then 1070
+1080 get i$:if i$="" then 1080
+1090 goto 550
+1100 if f<5 then 1150
+1110 print:print t$(3-t);" win by an innings"
+1120 print"and";r(3-t,1)-r(t,1)-r(t,2);"run";
+1130 if r(3-t,1)-r(t,1)-r(t,2)>1 then print"s";
+1140 print"!":end
+1150 if r(t,2)=tg then print:print"it's a tie!":end
+1160 if r(t,2)<tg then 1190
+1170 print:print t$(t);" win by";10-w;"wicket";:if w>1 then print"s";
+1180 print"!":end
+1190 print:print t$(3-t);" win by";tg+1-r(t,2);"run";:if tg+1-r(t,2)>1 then print"s";
+1200 print"!"
