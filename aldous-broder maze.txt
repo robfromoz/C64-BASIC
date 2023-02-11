@@ -1,0 +1,47 @@
+10 rem aldous-broder maze algorithm by rob vonk 2023
+20 rem from "mazes for programmers" by jamis buck, 2015, pages 55-57
+30 rem randomise, set maximum dimensions of maze and set count of unvisited
+40 rem cells to zero. mx and my must both be odd or maze won't display properly
+50 rem works better with mx<=21 and my<=39
+60 rem warning: this algorithm is slow!
+70 z=rnd(-ti):c=0:mx=39:my=21:dim m$(my,mx),m(my,mx)
+80 rem create grid with cell spaces surrounded by # fences, and count each
+90 rem unvisited cell as we go
+100 for i=1 to my:if i/2=int(i/2) then 120
+110 for j=1 to mx:m$(i,j)="#":next j:goto 160
+120 for j=1 to mx:if j/2=int(j/2) then m$(i,j)=" ":m(i,j)=0:c=c+1:goto 140
+130 m$(i,j)="#"
+140 next j
+150 rem start at random cell
+160 next i:x=int(rnd(1)*(((mx-1)-2)/2+1))*2+2:y=int(rnd(1)*(((my-1)-2)/2+1))*2+2
+170 rem if unvisited cell count is zero, display maze
+180 if c=0 then 460
+190 rem set random direction north = 1, south = 2, east = 3, west = 4
+200 on int(rnd(1)*4+1) goto 230,290,350,410
+210 rem north
+220 rem if at very top try new direction
+230 if y=2 then 200
+240 rem if moved into unvisited cell, remove wall to south and set to visited
+250 y=y-2:if m(y,x)=0 then m$(y+1,x)=" ":m(y,x)=1:c=c-1
+260 goto 180
+270 rem south
+280 rem if at very bottom try new direction
+290 if y=20 then 200
+300 rem if moved into unvisited cell, remove wall to north and set to visited
+310 y=y+2:if m(y,x)=0 then m$(y-1,x)=" ":m(y,x)=1:c=c-1
+320 goto 180
+330 rem east
+340 rem if at far right try new direction
+350 if x=38 then 200
+360 rem if moved into unvisited cell, remove wall to west and set to visited
+370 x=x+2:if m(y,x)=0 then m$(y,x-1)=" ":m(y,x)=1:c=c-1
+380 goto 180
+390 rem west
+400 rem if at far left try new direction
+410 if x=2 then 200
+420 rem if moved into unvisited cell, remove wall to east and set to visited
+430 x=x-2:if m(y,x)=0 then m$(y,x+1)=" ":m(y,x)=1:c=c-1
+440 goto 180
+450 rem display maze
+460 print"{clear}{white}":poke 53280,0:poke 53281,0
+470 for i=1 to my:for j=1 to mx:print m$(i,j);:next j:print:next i

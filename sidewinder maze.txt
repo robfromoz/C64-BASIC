@@ -1,0 +1,29 @@
+10 rem sidewinder maze algorithm by rob vonk 2023
+20 rem from "mazes for programmers" by jamis buck, 2015, pages 12-15
+30 rem randomise and set maximum dimensions of maze
+40 rem both numbers must be odd or maze won't display properly
+50 rem works better with mx<=21 and my<=39
+60 z=rnd(-ti):mx=39:my=21:dim m$(my,mx)
+70 rem create grid with cell spaces surrounded by # fences
+80 for i=1 to my:if i/2=int(i/2) then 100
+90 for j=1 to mx:m$(i,j)="#":next j:goto 130
+100 for j=1 to mx:if j/2=int(j/2) then m$(i,j)=" ":goto 120
+110 m$(i,j)="#"
+120 next j
+130 next i:x=2:y=my-1:s=2:rem start at bottom left corner of grid
+140 rem carve tunnel right or up?
+150 if rnd(1)<.5 then 200
+160 if x=mx-1 then 200
+170 rem carve tunnel right
+180 x=x+2:m$(y,x-1)=" ":goto 150
+190 rem pick a tunnel cell in set and carve tunnel up from it
+200 t=int(rnd(1)*((x-s)/2+1))*2+s
+210 rem if not at right end, keep moving right
+220 m$(y-1,t)=" ":if x<mx-1 then x=x+2:s=x:goto 150
+230 rem if all the way to the right, make our way up to next row
+240 y=y-2:if y>2 then x=2:s=2:goto 150
+250 rem at top? carve horizontal tunnel
+260 for i=2 to mx-2:m$(y,i)=" ":next i
+270 rem display maze
+280 print"{clear}{white}":poke 53280,0:poke 53281,0
+290 for i=1 to my:for j=1 to mx:print m$(i,j);:next j:print:next i
