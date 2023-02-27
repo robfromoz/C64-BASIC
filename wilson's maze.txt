@@ -1,0 +1,83 @@
+10 rem wilson's maze algorithm by rob vonk 2023
+20 rem from "mazes for programmers" by jamis buck, 2015, pages 60-63
+30 rem randomise, set maximum dimensions of maze and set count of unvisited
+40 rem cells to zero. mx and my must both be odd or maze won't display properly
+50 rem works better with mx<=21 and my<=39
+60 rem warning: this algorithm is slow!
+70 z=rnd(-ti):c=0:mx=39:my=21:dim m$(my,mx),m(my,mx),d(my,mx)
+80 rem create grid with cell spaces surrounded by # fences, and count each
+90 rem unvisited cell as we go
+100 for i=1 to my:if i/2=int(i/2) then 120
+110 for j=1 to mx:m$(i,j)="#":next j:goto 160
+120 for j=1 to mx:if j/2=int(j/2) then m$(i,j)=" ":m(i,j)=0:c=c+1:goto 140
+130 m$(i,j)="#"
+140 next j
+150 rem select a random cell and set it to visited
+160 next i:x=int(rnd(1)*(((mx-1)-2)/2+1))*2+2:y=int(rnd(1)*(((my-1)-2)/2+1))*2+2
+170 m(y,x)=1:c=c-1
+180 rem if unvisited cell count is zero, display maze
+190 if c=0 then 820
+200 rem select another random cell to start our random walk from
+210 sx=int(rnd(1)*(((mx-1)-2)/2+1))*2+2:sy=int(rnd(1)*(((my-1)-2)/2+1))*2+2
+220 if m(sy,sx)<>0 then 210
+230 x=sx:y=sy
+240 m(y,x)=-1
+250 rem set random direction north = 1, east = 2, south = 3, west = 4
+260 on int(rnd(1)*4+1) goto 280,360,440,520
+270 rem if at very top try new direction
+280 if y=2 then 260
+290 rem if intersected with path, go to loop-erase routine
+300 d(y,x)=1:y=y-2:if m(y,x)=-1 then 610
+310 rem if intersected with maze, go to maze-carving routine
+320 if m(y,x)=1 then 720
+330 rem add current cell to walk
+340 m(y,x)=-1:goto 260
+350 rem if at far right try new direction
+360 if x=mx-1 then 260
+370 rem if intersected with path, go to loop-erase routine
+380 d(y,x)=2:x=x+2:if m(y,x)=-1 then 610
+390 rem if intersected with maze, go to maze-carving routine
+400 if m(y,x)=1 then 720
+410 rem add current cell to walk
+420 m(y,x)=-1:goto 260
+430 rem if at very bottom try new direction
+440 if y=my-1 then 260
+450 rem if intersected with path, go to loop-erase routine
+460 d(y,x)=3:y=y+2:if m(y,x)=-1 then 610
+470 rem if intersected with maze, go to maze-carving routine
+480 if m(y,x)=1 then 720
+490 rem add current cell to walk
+500 m(y,x)=-1:goto 260
+510 rem if at far left try new direction
+520 if x=2 then 260
+530 rem if intersected with path, go to loop-erase routine
+540 d(y,x)=4:x=x-2:if m(y,x)=-1 then 610
+550 rem if intersected with maze, go to maze-carving routine
+560 if m(y,x)=1 then 720
+570 rem add current cell to walk
+580 m(y,x)=-1:goto 260
+590 rem loop-erase routine
+600 rem start at where the walk intersects with itself
+610 cx=x:cy=y
+620 rem follow directions of walk
+630 if d(y,x)=1 then y=y-2:goto 680
+640 if d(y,x)=2 then x=x+2:goto 680
+650 if d(y,x)=3 then y=y+2:goto 680
+660 x=x-2
+670 rem remove cell from walk
+680 m(y,x)=0:if x=cx and y=cy then 240
+690 goto 630
+700 rem maze-carving routine
+710 rem go back to beginning of walk
+720 cx=x:cy=y:x=sx:y=sy
+730 m(y,x)=1:if x=cx and y=cy then 190
+740 rem follow the path removing walls between cells as we go
+750 if d(y,x)=1 then m$(y-1,x)=" ":y=y-2:goto 800
+760 if d(y,x)=2 then m$(y,x+1)=" ":x=x+2:goto 800
+770 if d(y,x)=3 then m$(y+1,x)=" ":y=y+2:goto 800
+780 m$(y,x-1)=" ":x=x-2
+790 rem decrement number of unvisited cells
+800 c=c-1:goto 730
+810 rem display maze
+820 print"{clear}{white}":poke 53280,0:poke 53281,0
+830 for i=1 to my:for j=1 to mx:print m$(i,j);:next j:print:next i
