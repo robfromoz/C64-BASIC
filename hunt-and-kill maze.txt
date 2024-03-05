@@ -1,0 +1,88 @@
+10 rem hunt-and-kill maze algorithm by rob vonk 2024
+20 rem from "mazes for programmers" by jamis buck, 2015, pages 67-69
+30 rem shuffled direction random walk routine idea by jamis buck
+40 rem randomise, set maximum dimensions of maze, and set arrays for hunt
+50 rem routine directions and random walk directions
+60 rem works better with mx<=21 and my<=39
+70 z=rnd(-ti):mx=39:my=21:dim m$(my,mx),m(my,mx),c(4),s(4)
+80 rem create grid with cell spaces surrounded by # fences
+90 for i=1 to my:if i/2=int(i/2) then 110
+100 for j=1 to mx:m$(i,j)="#":next j:goto 150
+110 for j=1 to mx:if j/2=int(j/2) then m$(i,j)=" ":m(i,j)=0:goto 130
+120 m$(i,j)="#"
+130 next j
+140 rem start at random cell
+150 next i:x=int(rnd(1)*(((mx-1)-2)/2+1))*2+2:y=int(rnd(1)*(((my-1)-2)/2+1))*2+2
+160 rem set random walk directions north = 1, east = 2, south = 3, west = 4
+170 for i=1 to 4:s(i)=i:next i
+180 rem set current cell to visited
+190 m(y,x)=1
+200 rem shuffle random walk directions
+210 for i=4 to 1 step -1:r=int(rnd(1)*4+1):t=s(r):s(r)=s(i):s(i)=t:next i
+220 rem cycle through list of directions
+230 for i=1 to 4:on s(i) goto 250,310,370,430
+240 rem if at very top try next direction
+250 if y=2 then 490
+260 rem if cell to north is visited try new direction
+270 if m(y-2,x)=1 then 490
+280 rem otherwise carve tunnel north
+290 y=y-2:m$(y+1,x)=" ":m(y,x)=1:goto 210
+300 rem if at far right try next direction
+310 if x=mx-1 then 490
+320 rem if cell to east is visited try new direction
+330 if m(y,x+2)=1 then 490
+340 rem otherwise carve tunnel east
+350 x=x+2:m$(y,x-1)=" ":m(y,x)=1:goto 210
+360 rem if at very bottom try next direction
+370 if y=my-1 then 490
+380 rem if cell to south is visited try new direction
+390 if m(y+2,x)=1 then 490
+400 rem otherwise carve tunnel south
+410 y=y+2:m$(y-1,x)=" ":m(y,x)=1:goto 210
+420 rem if at far left try next direction
+430 if x=2 then 490
+440 rem if cell to west is visited try new direction
+450 if m(y,x-2)=1 then 490
+460 rem otherwise carve tunnel west
+470 x=x-2:m$(y,x+1)=" ":m(y,x)=1:goto 210
+480 rem if there's nowhere to go, begin hunt routine
+490 next i
+500 rem start scan from top left hand corner of maze, set available direction
+510 rem flags to zero
+520 c=0:c(1)=0:c(2)=0:c(3)=0:c(4)=0:f=0:x=2:y=2
+530 rem scan cell
+540 if m(y,x)=1 then 810
+550 rem if at very top try next direction
+560 if y=2 then 600
+570 rem otherwise add north to list of available directions
+580 if m(y-2,x)=1 then c=c+1:f=1:c(c)=1
+590 rem if at far right try next direction
+600 if x=mx-1 then 640
+610 rem otherwise add east to list of available directions
+620 if m(y,x+2)=1 then c=c+1:f=1:c(c)=2
+630 rem if at very bottom try next direction
+640 if y=my-1 then 680
+650 rem otherwise add south to list of available directions
+660 if m(y+2,x)=1 then c=c+1:f=1:c(c)=3
+670 rem if at far left, see if we have anywhere to go
+680 if x=2 then 720
+690 rem otherwise add west to list of available directions
+700 if m(y,x-2)=1 then c=c+1:f=1:c(c)=4
+710 rem nowhere to go? see if we can move to the next cell
+720 if f=0 then 810
+730 rem choose random direction from those available and link current cell
+740 rem to visited cell in that direction
+750 on c(int(rnd(1)*c+1)) goto 760,770,780,790
+760 m$(y-1,x)=" ":goto 190
+770 m$(y,x+1)=" ":goto 190
+780 m$(y+1,x)=" ":goto 190
+790 m$(y,x-1)=" ":goto 190
+800 rem if no more unvisited cells, display maze
+810 if x=mx-1 and y=my-1 then 850
+820 if x=mx-1 then x=2:y=y+2:goto 540
+830 x=x+2:goto 540
+840 rem make entrance and exit
+850 m$(1,2)=" ":m$(my,mx-1)=" "
+860 rem display maze
+870 print"{clear}{white}":poke 53280,0:poke 53281,0:for i=1 to my:for j=1 to mx
+880 print m$(i,j);:next j:print:next i
