@@ -1,0 +1,42 @@
+10 rem hamback rob vonk 2025
+20 rem based on board game of same name by ian and sarah walker 2007
+30 rem https://boardgamegeek.com/boardgame/152975/hamback
+40 z=rnd(-ti):poke 53280,15:poke 53281,15
+50 print"{147}{144}":print"this game is called 'hamback'."
+60 print:print"this game is a backgammon variant that"
+70 print"uses six counters, a six-sided die and"
+80 print"a board of seven lines. all the pieces"
+90 print"start on the rightmost line."
+100 print:print"roll the die and move a counter to the"
+110 print"left exactly the number showing on the"
+120 print"die. if you can't move, you must move a"
+130 print"counter from the leftmost line back to"
+140 print"the start. if you have no counters in"
+150 print"the 'finish' column, the game is over."
+160 print:print"you win when you move all the pieces to"
+170 print"'finish' column.":for i=1 to 6:print:next i
+180 print"                              hit a key"
+190 get i$:if i$<>"" then 190
+200 get i$:if i$="" then 200
+210 dim c(7):s$="start ":f$="finish":print"{147}":c(7)=6
+220 print tab(13);"1 2 3 4 5 6 7":print tab(12);"+-+-+-+-+-+-+-+"
+230 for i=1 to 6:print tab(11);mid$(f$,i,1);"!";:for j=1 to 7
+240 if c(j)>0 and i<=c(j) then print"o!";:goto 260
+250 print" !";
+260 next j:print mid$(s$,i,1):next i:print tab(12);"+-+-+-+-+-+-+-+"
+270 if c(1)=6 then print:print"you've won the game!":end
+280 print:print"hit a key to roll the die."
+290 get i$:if i$<>"" then 290
+300 get i$:if i$="" then 300
+310 print:print"rolling...";:d=int(rnd(1)*6+1):for i=1 to 1000:next i
+320 print"your roll is";d:f=0:for i=2 to 7:if c(i)>0 and i-d>0 then f=1
+330 next i:if f=1 then 380
+340 print:print"you can't move.":if c(1)=0 then 370
+350 print:print"a counter goes from the finish line     back to the start."
+360 c(1)=c(1)-1:c(7)=c(7)+1:print:goto 220
+370 print:print"and your finish line is empty, so it's  game over.":end
+380 print:print"your move";
+390 input a:if a<1 or a>7 then print:print"1-7 please.":goto 390
+400 if c(a)=0 then print:print"there are no counters in that column.":goto 390
+410 if a-d<1 then print:print"you can't move there.":goto 390
+420 c(a)=c(a)-1:c(a-d)=c(a-d)+1:print:print:goto 220
