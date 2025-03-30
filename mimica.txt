@@ -1,0 +1,88 @@
+10 rem mimica rob vonk 2025
+20 rem based on board game 'mimikry' by heinz meister 1989
+30 rem https://boardgamegeek.com/boardgame/145920
+40 poke 53280,6:poke 53281,6:dim b(6,6),s(6):data 1,4,2,1,3,2
+50 print"{clear}{white}":print"this game is called 'mimica'."
+60 print:print"the game is played on a six by six"
+70 print"grid. you choose which three squares"
+80 print"are to be left blank, while the rest"
+90 print"of them are filled with 'o' pieces."
+100 print"next to every row is a number"
+110 print"indicating how many spaces the"
+120 print"pieces in that row can move,"
+130 print"horizontally, vertically and"
+140 print"diagonally to end their movement on"
+150 print"a blank space. every piece that has"
+160 print"moved to a blank space is changed"
+170 print"to a 'x' piece. the game ends when"
+180 print"all the pieces are changed to 'x'."
+190 print"if there are still pieces that"
+200 print"cannot be moved to a blank space,"
+210 print"you lose."
+220 print:print:print:print"                              hit a key"
+230 get i$:if i$<>"" then 230
+240 get i$:if i$="" then 240
+250 print"{clear}":for i=1 to 6:read s(i):next i:for i=1 to 6:for j=1 to 6
+260 b(i,j)=79:next j:next i:n=0:for i=1 to 3
+270 print"enter x,y for blank space #";i;
+280 input x,y:if x<1 or x>6 or y<1 or y>6 then print"1-6 please.":goto 280
+290 if b(y,x)=32 then print"that space is already blank.":goto 280
+300 b(y,x)=32:next i
+310 rem check to see if there are any valid moves left
+320 f=0:for i=1 to 6:for j=1 to 6:if b(i,j)<>79 then 570
+330 rem up
+340 if i-s(i)<0 then 370
+350 if b(i-s(i),j)=32 then f=1
+360 rem up and right
+370 if i-s(i)<0 or j+s(i)>5 then 400
+380 if b(i-s(i),j+s(i))=32 then f=1
+390 rem right
+400 if j+s(i)>5 then 430
+410 if b(i,j+s(i))=32 then f=1
+420 rem right and down
+430 if i+s(i)>5 or j+s(i)>5 then 460
+440 if b(i+s(i),j+s(i))=32 then f=1
+450 rem down
+460 if i+s(i)>5 then 490
+470 if b(i+s(i),j)=32 then f=1
+480 rem down and left
+490 if i+s(i)>5 or j-s(i)<0 then 520
+500 if b(i+s(i),j-s(i))=32 then f=1
+510 rem left
+520 if j-s(i)<0 then 550
+530 if b(i,j-s(i))=32 then f=1
+540 rem up and left
+550 if i-s(i)<0 or j-s(i)<0 then 570
+560 if b(i-s(i),j-s(i))=32 then f=1
+570 next j:next i
+580 print:print tab(16);"123456":print:for i=1 to 6
+590 print tab(10);"(";chr$(48+s(i));")";i;:for j=1 to 6:print chr$(b(i,j));
+600 next j:print:next i
+610 if f=0 and n<33 then print"you can't move, so it's game over.":end
+620 if n=33 then print"you win the game!":end
+630 print:print"enter your move from (x,y)";
+640 input a,b:if a<1 or a>6 or b<1 or b>6 then print"1-6 please.":goto 640
+650 if b(b,a)=88 then print"that piece is already flipped.":goto 630
+660 if b(b,a)=32 then print"there's no piece there.":goto 630
+670 print"                  to (x,y)";
+680 input c,d:if c<1 or c>6 or d<1 or d>6 then print"1-6 please.":goto 680
+690 if b(d,c)<>32 then print"there's no space there.":goto 680
+700 rem check to see if move is correct number of spaces
+710 rem up
+720 f=0:if a=c and b-d=s(b) then f=1
+730 rem up and right
+740 if c-a=s(b) and b-d=s(b) then f=1
+750 rem right
+760 if c-a=s(b) and b=d then f=1
+770 rem right and down
+780 if c-a=s(b) and d-b=s(b) then f=1
+790 rem down
+800 if a=c and d-b=s(b) then f=1
+810 rem down and left
+820 if a-c=s(b) and d-b=s(b) then f=1
+830 rem left
+840 if a-c=s(b) and b=d then f=1
+850 rem left and up
+860 if a-c=s(b) and b-d=s(b) then f=1
+870 if f=0 then print"that move is invalid.":goto 630
+880 b(b,a)=32:b(d,c)=88:n=n+1:goto 320
