@@ -1,0 +1,14 @@
+10 rem procedural ascii art by rob vonk 2025
+20 rem based upon pseudocode written by chatgpt using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 rem this program outputs to the printer using open, print# and cmd. change
+60 rem these to run on your particular system.
+70 w=80:h=40:s=.2:open 1,4:cmd 1:for y=0 to h-1:for x=0 to w-1:fx=(x-w/2)*s:
+80 fy=(y-h/2)*s:v=sin(sqr(fx*fx+fy*fy))+cos(fx*2+tan(fy))
+90 if v<-1 then c$=".":goto 140
+100 if v<-.5 then c$=":":goto 140
+110 if v<0 then c$="*":goto 140
+120 if v<.5 then c$="o":goto 140
+130 c$="#"
+140 print c$;:next x:print:next y:print#1:close 1
