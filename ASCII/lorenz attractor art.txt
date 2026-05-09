@@ -1,0 +1,11 @@
+10 rem lorenz attractor ascii art by rob vonk 2026
+20 rem based on pseudocode written by chatgpt using the prompt "can you do some
+30 rem pseudocode for a lorenz attraction? output needs to be in ascii"
+40 si=10:rh=28:be=8/3:dt=.01:sp=5000:x=.01:y=0:z=0:w=80:h=65:dim g$(h,w)
+50 xi=-30:xa=30:zi=0:za=50:for i=0 to h-1:for j=0 to w-1:g$(i,j)=" "
+60 next j:next i:open 1,4:cmd 1:for i=1 to sp:dx=si*(y-x):dy=x*(rh-z)-y
+70 dz=x*y-be*z:x=x+dx*dt:y=y+dy*dt:z=z+dz*dt:co=int((x-xi)/(xa-xi)*(w-1))
+80 ro=int((z-zi)/(za-zi)*(h-1))
+90 if ro>0 and ro<h and co>0 and co<w then g$(ro,co)="*"
+100 next i:for i=0 to h-1:for j=0 to w-1:print g$(i,j);:next j:print:next i
+110 print#1:close 1

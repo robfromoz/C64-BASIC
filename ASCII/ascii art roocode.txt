@@ -1,0 +1,13 @@
+10 rem ascii art generator (roocode) by rob vonk 2026
+20 rem based on pseudocode assembled by roocode using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 rem note: open 1,4,7 opens printer in uppercase/lowercase mode, change this
+60 rem to run on your particular system or flavour of basic
+70 w=80:h=65:open 1,4,7:cmd 1:for y=0 to h-1:for x=0 to w-1
+80 va=sin(x*.1)*cos(y*.1)+tan((x+y)*.05)*.3:va=(va+2)-int((va+2)/4)*4
+90 if va<1 then print".";:goto 130
+100 if va<2 then print"o";:goto 130
+110 if va<3 then print"O";:goto 130
+120 print"#";
+130 next x:print:next y:print#1:close 1

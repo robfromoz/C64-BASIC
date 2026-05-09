@@ -1,0 +1,13 @@
+1 rem ascii diagonal wave quilt generator (grok) by rob vonk 2025
+2 rem based on pseudocode written by grok using the prompt "could you do some
+3 rem pseudocode for a random procedurally-generated ascii quilt pattern using
+4 rem trigonometric functions" and "can you do some different trig formulae so
+5 rem that different patterns can be displayed, or tweak the current formula?"
+10 w=80:h=40:dim q$(w,h):z=rnd(-ti):pi=atn(1)*4:c$="#*+=-@$"
+20 fx=rnd(1)*(.2-.05)+.05:fy=rnd(1)*(.2-.05)+.05:a=rnd(1)*4+2:p=rnd(1)*2*pi
+30 open 1,4:cmd 1:for x=0 to w-1:for y=0 to h-1
+40 wv=sin(fx*(x+y)+p)*cos(fy*(x-y)):n=(wv+a)/(2*a):c=int(n*len(c$))
+50 if c>len(c$) then c=len(c$)
+60 if c<1 then c=1
+70 q$(x,y)=mid$(c$,c,1):next y:next x:for y=0 to h-1:r$="":for x=0 to w-1
+80 r$=r$+q$(x,y):next x:print r$:next y:print#1:close 1

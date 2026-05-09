@@ -1,0 +1,19 @@
+10 rem angular swirl ascii art by rob vonk 2025
+20 rem based upon pseudocode written by chatgpt using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 rem this program outputs to the printer using open, print# and cmd. change
+60 rem these to run on your particular system.
+70 pi=atn(1)*4:w=80:h=65:s=.2:open 1,4:cmd 1:for y=0 to h-1:for x=0 to w-1
+80 fx=(x-w/2)*s:fy=(y-h/2)*s:if fx>0 then an=atn(fy/fx):goto 140
+90 if fx<0 and fy>=0 then an=atn(fy/fx)+pi:goto 140
+100 if fx<0 and fy<0 then an=atn(fy/fx)-pi:goto 140
+110 if fx=0 and fy>0 then an=pi/2:goto 140
+120 if fx=0 and fy<0 then an=-(pi/2):goto 140
+130 an=0
+140 v=cos(an*3)*sin(sqr(fx^2+fy^2)*2):if v<-1 then c$=".":goto 190
+150 if v<-.5 then c$=":":goto 190
+160 if v<0 then c$="*":goto 190
+170 if v<.5 then c$="o":goto 190
+180 c$="#"
+190 print c$;:next x:print:next y:print#1:close 1

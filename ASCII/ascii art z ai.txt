@@ -1,0 +1,10 @@
+10 rem ascii art generator (z.ai) by rob vonk 2026
+20 rem based on pseudocode assembled by z.ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:ch$=" .:-=+*#%@":open 1,4:cmd 1:for y=0 to h-1:for x=0 to w-1:
+60 nx=(x-w/2)/(w/2):ny=(y-h/2)/(h/2):di=sqr(nx*nx+ny*ny):w1=sin(di*10)
+70 w2=cos(nx*5+ny*5):w3=tan(di*2+nx*.5):cv=w1+w2+(w3*.2):in=int((cv+4)*1.5)
+80 if in<0 then in=0
+90 if in>len(ch$)-1 then in=len(ch$)-1
+100 print mid$(ch$,in+1,1);:next x:print:next y:print#1:close 1

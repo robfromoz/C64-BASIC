@@ -1,0 +1,47 @@
+10 rem ascii art generator (claude) by rob vonk 2026
+20 rem based on pseudocode assembled by claude ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 pi=atn(1)*4:ac$=" .:;=+*#@":w=80:h=65:print"{clear}"
+60 print"this program is an ascii pattern"
+70 print"generator. the following patterns are":print"available:":print
+80 print"1. waves":print"2. ripples":print"3. spiral":print"4. interference"
+90 print"5. mandala":print"6. plasma":print"7. tangent"
+100 print:print"select a pattern (1-7)";
+110 input i:if i<1 or i>7 then print"1 to 7 please.":goto 110
+120 print:print"enter pattern seed (0-10)";
+130 input s:if s<0 or s>10 then print"0 to 10 please.":goto 110
+140 open 1,4:cmd 1:for y=0 to h-1:li$="":for x=0 to w-1
+150 on i gosub 220,240,270,300,330,360,390
+160 n=(v+1)/2:ch$=mid$(ac$,int(n*len(ac$))+1,1):li$=li$+ch$:next x:print li$
+170 next y:print#1:close 1:print:print"another pattern (y/n)";
+180 input i$:if i$<>"y" and i$<>"n" then print"y or n please.":goto 180
+190 if i$="y" then 100
+200 end
+210 rem sinusoidal waves pattern
+220 f1=.1:f2=.05:v=sin(x*f1+s)*cos(y*f2+s):return
+230 rem concentric ripples from centre
+240 cx=w/2:cy=h/2:di=sqr((x-cx)^2+(y-cy)^2):v=sin(di*.3+s*2)*cos(di*.1)
+250 return
+260 rem spiral pattern using polar coordinates
+270 cx=w/2:cy=h/2:dx=x-cx:dy=y-cy:gosub 420:ra=sqr(dx^2+dy^2)
+280 v=sin(an*3+ra*.2+s):return
+290 rem wave interference pattern
+300 w1=sin(x*.2+s):w2=cos(y*.15+s*.7):w3=sin(sqr(x^2+y^2)*.1+s*1.5)
+310 v=(w1+w2+w3)/3:return
+320 rem mandala-like pattern
+330 cx=w/2:cy=h/2:dx=x-cx:dy=y-cy:gosub 420:ra=sqr(dx^2+dy^2):sy=8
+340 na=(an+pi)/(2*pi)*sy:rc=sin(na*pi)*cos(ra*.2+s):v=rc*sin(ra*.1+t*.5):return
+350 rem plasma effect using multiple sin/cos waves
+360 v1=sin(x*.05+s):v2=sin(y*.07+s*1.2):v3=sin((x+y)*.04+s*.8)
+370 v4=sin(sqr(x^2+y^2)*.02+s*1.5):v=(v1+v2+v3+v4)/4:return
+380 rem pattern using tangent function (with bounds checking)
+390 tv=tan((x+y)*.1+s):if abs(tv)>10 then tv=sgn(tv)*10
+400 wa=sin(x*.1)*cos(y*.1):v=(tv*.1+wa)/2:return
+410 rem this subroutine simulates the atan2 function
+420 if dx>0 then an=atn(dy/dx):return
+430 if dx<0 and dy>=0 then an=atn(dy/dx)+pi:return
+440 if dx<0 and dy<0 then an=atn(dy/dx)-pi:return
+450 if dx=0 and dy>0 then an=pi/2:return
+460 if dx=0 and dy<0 then an=-(pi/2):return
+470 an=0:return

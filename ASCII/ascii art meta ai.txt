@@ -1,0 +1,10 @@
+10 rem ascii art meta ai by rob vonk 2026
+20 rem based upon pseudocode written by meta ai using the prompt "i'd like some
+30 rem to generate an abstract ascii art piece, you can use trig functions,
+40 rem cellular automata, controlled randomness or a combination of all three"
+50 z=rnd(-ti):w=80:h=65:open 1,4:cmd 1:for y=0 to h-1:for x=0 to w-1
+60 d=sqr((x-w/2)^2+(y-h/2)^2):n=sin(d*.1)*(x/w+y/h)+(rnd(1)*1-.5)
+70 if n>0 then print"*";:goto 100
+80 if n>-.3 then print".";:goto 100
+90 print" ";
+100 next x:print:next y:print#1:close 1

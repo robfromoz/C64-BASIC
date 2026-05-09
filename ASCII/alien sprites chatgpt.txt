@@ -1,0 +1,14 @@
+10 rem alien sprite generator (chatgpt) by rob vonk 2026
+20 rem based upon pseudocode written by chatgpt using the prompt "can you do
+30 rem pseudocode to create randomly generated alien sprites using just the #
+40 rem symbol, make the size 24 characters wide by 21 characters tall" with
+50 rem all suggested alterations by chatgpt implemented
+60 rem 24x21 is the size of a commodore 64 sprite, change the x and y values to
+70 rem suit your system or variety of basic
+80 z=rnd(-ti):w=24:h=21:hw=w/2:fc=.45:for y=0 to h-1:ro$="":de=.6-(y/h)*.4
+90 for x=0 to hw-1:r=rnd(1):ch$=" ":if r<fc then ch$="#"
+100 if y>h and rnd(1)<.5 then ch$="#"
+110 if y=6 and (x=3 or x=5) then ch$="#"
+120 if x=hw-1 and rnd(1)<.8 then ch$="#"
+130 ro$=ro$+ch$:next x:mi$="":for i=hw to 1 step -1:mi$=mi$+mid$(ro$,i,1)
+140 next i:fr$=ro$+mi$:print fr$:next y

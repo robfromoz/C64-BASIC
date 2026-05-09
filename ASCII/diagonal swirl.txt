@@ -1,0 +1,9 @@
+10 rem ascii diagonal swirl quilt generator by rob vonk 2025
+20 rem based on pseudocode written by chatgpt using the prompt "could you do
+30 rem some pseudocode for a random procedurally-generated ascii quilt pattern
+40 rem using trigonometric functions"
+50 w=80:h=25:fx=.2:fy=.3:c$=" .:*+#%@":open 1,4:cmd 1:for y=0 to h-1:l$=""
+60 for x=0 to w-1:v=sin(x*.1+y*.15)+cos(x*.15-y*.1):n=(v+2)/4:i=int(n*len(c$))
+70 if i>=len(c$) then i=len(c$)
+80 if i<1 then i=1
+90 l$=l$+mid$(c$,i,1):next x:print l$:next y

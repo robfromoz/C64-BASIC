@@ -1,0 +1,48 @@
+10 rem 2d perlin noise ascii texture
+20 rem original basic program by claude ai in 2026 using original perlin
+30 rem permutation table. program shortened and permutation table provided by
+40 rem rob vonk. the data statements were entered in the prompt and the llm was
+50 rem asked to build the basic program around them
+60 rem perlin's original permutation table (lines 60-190)
+70 data 151,160,137,91,90,15,131,13,201,95,96,53,194,233,7,225,140,36,103,30,69
+80 data 142,8,99,37,240,21,10,23,190,6,148,247,120,234,75,0,26,197,62,94,252
+90 data 219,203,117,35,11,32,57,177,33,88,237,149,56,87,174,20,125,136,171,168
+100 data 68,175,74,165,71,134,139,48,27,166,77,146,158,231,83,111,229,122,60,211
+110 data 133,230,220,105,92,41,55,46,245,40,244,102,143,54,65,25,63,161,1,216,80
+120 data 73,209,76,132,187,208,89,18,169,200,196,135,130,116,188,159,86,164,100
+130 data 109,198,173,186,3,64,52,217,226,250,124,123,5,202,38,147,118,126,255,82
+140 data 85,212,207,206,59,227,47,16,58,17,182,189,28,42,223,183,170,213,119,248
+150 data 152,2,44,154,163,70,221,153,101,155,167,43,172,9,129,22,39,253,19,98
+160 data 108,110,79,113,224,232,178,185,112,104,218,246,97,228,251,34,242,193
+170 data 238,210,144,12,191,179,162,241,81,51,145,235,249,14,239,107,49,192,214
+180 data 31,181,199,106,157,184,84,204,176,115,121,50,45,127,4,150,254,138,236
+190 data 205,93,222,114,67,29,24,72,243,141,128,195,78,66,215,61,156,180
+200 rem initialise
+210 w=40:h=20:s=5:dim p(512):for i=1 to 256:read p(i):p(256+i)=p(i):next i
+220 rem ramp: maps noise [-1,1] to char index [1,10]
+230 rem chars go from dark/sparse to dense/bright
+240 cs$=" .,:;+*#%@"
+250 rem main render loop
+260 open 1,4:cmd 1:for rw=0 to h-1:for cl=0 to w-1:x=cl/s:y=rw/s:gosub 300
+270 ci=int((nv+1)*4.5)+1:if ci<1 then ci=1
+280 if ci>10 then ci=10
+290 print mid$(cs$,ci,1);:next cl:print:next rw:print#1:close 1:end
+300 rem 2d perlin noise subroutine
+310 rem input:  x, y  output: nv
+320 xi=int(x) and 255:yi=int(y) and 255:xf=x-int(x):yf=y-int(y)
+330 uf=xf*xf*xf*(xf*(xf*6-15)+10):vf=yf*yf*yf*(yf*(yf*6-15)+10)
+340 rem hash 4 corners
+350 aa=p(p(xi+1)+yi+1):ab=p(p(xi+1)+yi+2):ba=p(p(xi+2)+yi+1)
+360 bb=p(p(xi+2)+yi+2)
+370 rem grad for each corner via hh,dx,dy -> gv
+380 hh=aa:dx=xf:dy=yf:gosub 430:g1=gv:hh=ba:dx=xf-1:dy=yf:gosub 430:g2=gv
+390 hh=ab:dx=xf:dy=yf-1:gosub 430:g3=gv:hh=bb:dx=xf-1:dy=yf-1:gosub 430
+400 g4=gv
+410 rem bilinear interpolation
+420 l1=g1+uf*(g2-g1):l2=g3+uf*(g4-g3):nv=l1+vf*(l2-l1):return
+430 rem grad: hh, dx, dy -> gv
+440 hb=hh and 3:if hb=0 then gv=dx+dy:return
+450 if hb=1 then gv=-dx+dy:return
+460 if hb=2 then gv=dx-dy:return
+470 gv=-dx-dy
+480 return

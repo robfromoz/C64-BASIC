@@ -1,0 +1,12 @@
+10 rem ascii art generator (copilot) by rob vonk 2026
+20 rem based on pseudocode written by copilot using the prompts "can you do
+30 rem pseudocode for a random procedurally-generated ascii pattern using
+40 rem trigonometric functions and the sqr function" and "do the program with
+50 rem the rnd function"
+60 z=rnd(-ti):w=80:h=65:open 1,4:cmd 1:for y=0 to h-1:for x=0 to w-1
+70 rf=rnd(1)*2-1:v=sin(x*.1)*cos(y*.1)*sqr(abs(x-y))+rf
+80 if v<-.5 then ch$="#":goto 120
+90 if v<0 then ch$="*":goto 120
+100 if v<.5 then ch$="+":goto 120
+110 ch$="."
+120 print ch$;:next x:print:next y:print#1:close 1

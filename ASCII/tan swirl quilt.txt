@@ -1,0 +1,11 @@
+10 rem ascii tan swirl quilt generator (grok) by rob vonk 2025
+20 rem based on pseudocode written by grok using the prompt "could you do some
+30 rem pseudocode for a random procedurally-generated ascii quilt pattern using
+40 rem trigonometric functions"
+50 w=80:h=65:dim q$(w,h):z=rnd(-ti):pi=atn(1)*4:c$="#*+=-@$"
+60 fx=rnd(1)*(.2-.05)+.05:fy=rnd(1)*(.2-.05)+.05:a=rnd(1)*4+2:p=rnd(1)*2*pi
+70 for x=0 to w-1:for y=0 to h-1:wv=tan(fx*x*y/(w+h))*a:n=(wv+a)/(2*a)
+80 c=int(n*len(c$)):if c>len(c$) then c=len(c$)
+90 if c<1 then c=1
+100 q$(x,y)=mid$(c$,c,1):next y:next x:open 1,4:cmd 1:for y=0 to h-1:r$=""
+110 for x=0 to w-1:r$=r$+q$(x,y):next x:print r$:next y:print#1:close 1

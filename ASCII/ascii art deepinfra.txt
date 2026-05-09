@@ -1,0 +1,11 @@
+10 rem ascii art (deepinfra) by rob vonk 2026
+20 rem based on pseudocode assembled by deepinfra using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:sc=.1:of=5:open 1,4:cmd 1:for y=0 to h-1:li$="":for x=0 to w-1
+60 fx=(x-w/2)*sc:fy=(y-h/2)*sc:va=sin(fx)*cos(fy)*2:va=va+sin(fx^2+fy^2)*3
+70 va=va+tan(fx*fy*.1)*.5:no=(va+of)/(of*2):de=int(no*9+.5):ch$=" .:-=+*#%@"
+80 if de<0 then c$=" ":goto 110
+90 if de>8 then c$="@":goto 110
+100 c$=mid$(ch$,de+1,1)
+110 li$=li$+c$:next x:print li$:next y:print#1:close 1

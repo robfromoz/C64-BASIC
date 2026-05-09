@@ -1,0 +1,10 @@
+10 rem ascii art generator (poe) by rob vonk 2026
+20 rem based upon pseudocode written by poe using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 h=40:w=80:pi=atn(1)*4:fr=5:ac$=" .:-=+*#%@":for y=0 to h-1:for x=0 to w-1
+60 open 1,4:cmd 1:nx=(x/w)*2+1:ny=(y/h)*2-1
+70 v=sin(nx*pi*fr)*cos(ny*pi*fr)*sqr(nx)*tan(ny):ai=int((v+1)*(len(ac$)/2)+.5)
+80 if ai<0 then ai=0
+90 if ai>len(ac$)-1 then ai=len(ac$)-1
+100 print mid$(ac$,ai+1,1);:next x:print:next y:print#1:close 1

@@ -1,0 +1,11 @@
+10 rem ascii art perplexity by rob vonk 2026
+20 rem based on pseudocode written by perplexity using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=79:h=65:ch$=" .:-=+*#%@":open 1,4:cmd 1:for y=0 to h:for x=0 to w
+60 nx=(x/(w-1))*2-1:ny=(y/(h-1))*2-1
+70 v=sin(3*nx)+cos(5*ny)-.5*tan(nx*ny)+.3*sqr(nx^2+ny^2)
+80 vn=(v+2)/4:if vn<0 then vn=0
+90 if vn>1 then vn=1
+100 id=int(vn*len(ch$)+1):print mid$(ch$,id,1);:next x:print:next y:print#1
+110 close 1

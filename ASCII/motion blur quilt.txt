@@ -1,0 +1,10 @@
+10 rem ascii motion blur pattern quilt generator by rob vonk 2025
+20 rem based on pseudocode written by chatgpt using the prompt "could you do
+30 rem some pseudocode for a random procedurally-generated ascii quilt pattern
+40 rem using trigonometric functions" and the organic pattern variation
+50 rem provided by copilot
+60 w=80:h=65:fx=.2:fy=.3:c$=" .:*+#%@":open 1,4:cmd 1:for y=0 to h-1:l$=""
+70 for x=0 to w-1:a=x*fx+y*fy:v=sin((y+sin(x*fx)*3)*fy):n=(v+2)/4
+80 i=int(n*len(c$)):if i>=len(c$) then i=len(c$)
+90 if i<1 then i=1
+100 l$=l$+mid$(c$,i,1):next x:print l$:next y

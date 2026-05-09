@@ -1,0 +1,11 @@
+10 rem alien sprite generator (copilot) by rob vonk 2026
+20 rem based on pseudocode assembled by microsoft copilot using the prompt "can
+30 rem you do some pseudocode to create randomly generated alien sprites using
+40 rem just the # symbol, make the size 24 characters wide by 21 characters
+50 rem tall"
+60 z=rnd(-ti):w=24:h=21:dim sp$(h):hw=int(w/2+.5):for y=0 to h-1:fp=.45
+70 if y<5 then fp=.35:goto 90
+80 if y<14 then fp=.65
+90 lh$="":rh$="":for x=0 to hw-1:c$=" ":if rnd(1)<fp then c$="#"
+100 lh$=lh$+c$:next x:for x=hw to w-1:rh$=rh$+mid$(lh$,w-x,1)
+110 next x:sp$(y)=lh$+rh$:next y:for y=0 to h-1:print sp$(y):next y
