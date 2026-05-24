@@ -1,0 +1,10 @@
+10 rem ascii art generator (tendem) by rob vonk 2026
+20 rem based on pseudocode written by tendem ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:ch$=" .:-=+*#%@":open 1,4:cmd 1:for y=0 to h-1:li$=""
+60 for x=0 to w-1: nx=(x-w/2)/(w/2):ny=(y-h/2)/(h/2):r=sqr(nx*nx+ny*ny)
+70 v=sin(12*r)+cos(6*nx)+sin(6*ny)+.1*tan(nx*ny+.5)
+80 i=int(((v+2)/6*len(ch$)-1)):if i<0 then i=0
+90 if i>len(ch$)-1 then i=len(ch$)-1
+100 li$=li$+mid$(ch$,i+1,1):next x:print li$:next y:print#1:close 1
