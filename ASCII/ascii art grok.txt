@@ -1,0 +1,12 @@
+10 rem ascii art generator (grok) by rob vonk 2026
+20 rem based upon pseudocode written by chatgpt using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 open 1,4:cmd 1:w=80:h=65:sc=.1:am=10:for y=0 to h-1:for x=0 to w-1
+60 va=sin(x*sc)*cos(y*sc)*am:va=va+tan(x*y*sc*.1)*2:va=va+sqr(x*sc)*.5
+70 no=int((va*am)/(2*am)*5):ch$=" ":if no=0 then ch$="."
+80 if no=1 then ch$="-"
+90 if no=2 then ch$="+"
+100 if no=3 then ch$="*"
+110 if no=4 then ch$="#"
+120 print ch$;:next x:print:next y:print#1:close 1
