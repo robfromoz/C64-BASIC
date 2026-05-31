@@ -1,0 +1,12 @@
+10 rem ascii art generator (codemate) by rob vonk 2026
+20 rem based on pseudocode assembled by codemate ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:pa$=" .:-=+*#%@":nc=len(pa$):open 1,4:cmd 1:for y=0 to h-1:rs$=""
+60 for x=0 to w-1:nx=(x/w)*6-3:ny=(y/h)*6-3:di=sqr((nx*nx)+(ny*ny))
+70 ws=sin(di*4):wc=cos(nx*3.14)*sin(ny*3.14):wt=tan(di/2):if wt>2 then wt=2
+80 if wt<-2 then wt=-2
+90 cv=ws+wc+(wt*.5):nv=(cv+3)/6:if nv<0 then nv=0
+100 if nv>1 then nv=.999
+110 ci=int(nv*nc):rs$=rs$+mid$(pa$,ci,1):next x:print rs$:next y:print#1
+120 close 1
