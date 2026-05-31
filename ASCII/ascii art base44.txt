@@ -1,5 +1,5 @@
 10 rem ascii art generator (base44) by rob vonk 2026
-20 rem based on pseudocode assembled by base44 ai using the prompts "can you do
+20 rem based on pseudocode assembled by base44 ai using the prompt "can you do
 30 rem pseudocode that displays a procedurally-generated ascii pattern using
 40 rem formulas such as sin() cos() sqr() and tan()"
 50 ch$=" .:-=+*#%@":pi=atn(1)*4:w=80:h=65:open 1,4:cmd 1:for y=0 to h-1:li$=""
