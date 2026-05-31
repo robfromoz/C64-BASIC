@@ -4,8 +4,8 @@
 40 rem formulas such as sin() cos() sqr() and tan()"
 50 ch$=" .:-=+*#%@":pi=atn(1)*4:w=80:h=65:open 1,4:cmd 1:for y=0 to h-1:li$=""
 60 for x=0 to w-1:nx=(x/w)*2*pi-pi:ny=(y/h)*2*pi-pi
-70 va=sin(nx*3)*cos(ny*2)+sin(nx*ny)+cos(sqr(nx^2+ny^2)*4)*.5
-80 no=(va+2.5)/5:if no<0 then no=0
+70 va=sin(nx*3)*cos(ny*2)+sin(nx*ny)+cos(sqr(nx^2+ny^2)*4)*.5:no=(va+2.5)/5
+80 if no<0 then no=0
 90 if no>1 then no=1
 100 in=int(no*(len(ch$))):li$=li$+mid$(ch$,in+1,1):next x:print li$:next y
 110 print#1:close 1
