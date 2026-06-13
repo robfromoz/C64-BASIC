@@ -1,0 +1,49 @@
+10 rem bodmas expression evaluator
+20 rem original basic program by claude ai 2026, program shortened by rob vonk
+30 rem original prompt was "i want to make a basic program that evaluates a
+40 rem formula following bodmas, and i don't know how to go about it"
+50 dim sk(50),re(50):sp=0:input"formula";ex$:po=1:gosub 100:print"=";rr:end
+60 rem skip spaces
+70 if po>len(ex$) then return
+80 if mid$(ex$,po,1)=" " then po=po+1:goto 70
+90 return
+100 rem parse expression (+ and -)
+110 sp=sp+1:sk(sp)=ev:gosub 180:ev=rr
+120 gosub 60
+130 if po>len(ex$) then rr=ev:sp=sp-1:return
+140 ch$=mid$(ex$,po,1)
+150 if ch$="+" then po=po+1:gosub 60:gosub 180:ev=ev+rr:goto 120
+160 if ch$="-" then po=po+1:gosub 60:gosub 180:ev=ev-rr:goto 120
+170 rr=ev:ev=sk(sp):sp=sp-1:return
+180 rem parse term (* and /)
+190 sp=sp+1:sk(sp)=tv:gosub 280:tv=rr
+200 gosub 60
+210 if po>len(ex$) then rr=tv:tv=sk(sp):sp=sp-1:return
+220 ch$=mid$(ex$,po,1)
+230 if ch$="*" then po=po+1:gosub 60:gosub 280:tv=tv*rr:goto 200
+240 if ch$<>"/" then rr=tv:tv=sk(sp):sp=sp-1:return
+250 po=po+1:gosub 60:gosub 280
+260 if rr=0 then print"error: division by zero":stop
+270 tv=tv/rr:goto 200
+280 rem parse power (^)
+290 sp=sp+1:sk(sp)=pv:gosub 330:pv=rr:gosub 60
+300 if po>len(ex$) then rr=pv:pv=sk(sp):sp=sp-1:return
+310 if mid$(ex$,po,1)<>"^" then rr=pv:pv=sk(sp):sp=sp-1:return
+320 po=po+1:gosub 60:gosub 280:rr=pv^rr:pv=sk(sp):sp=sp-1:return
+330 rem parse factor (brackets, unary minus, number)
+340 rem bracketed sub-expression
+350 gosub 60:ch$=mid$(ex$,po,1):if ch$<>"(" then 400
+360 po=po+1:gosub 60:gosub 100
+370 gosub 60
+380 if mid$(ex$,po,1)<>")" then print "error: missing )":stop
+390 po=po+1:return
+400 rem unary minus
+410 if ch$<>"-" then 430
+420 po=po+1:gosub 60:gosub 330:rr=-rr:return
+430 rem number
+440 sa=po
+450 if po>len(ex$) then 480
+460 c$=mid$(ex$,po,1)
+470 if (c$>="0" and c$<="9") or c$="." then po=po+1:goto 450
+480 if po=sa then print"error: unexpected '" ;ch$;"'":stop
+490 rr=val(mid$(ex$,sa,po-sa)):return
