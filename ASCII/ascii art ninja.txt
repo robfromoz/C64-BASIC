@@ -1,0 +1,17 @@
+10 rem ascii art generator (ninja) by rob vonk 2025
+20 rem based on pseudocode assembled by ninja ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:pi=3.14159265359:ac$=" .:-=+*#%@":dim ca$(h,w):open 1,4:cmd 1
+60 for y=0 to h-1:for x=0 to w-1:nx=(x/w)*2-1:ny=(y/h)*2-1:di=sqr(nx*nx+ny*ny)
+70 an=0:if nx>0 then an=atn(ny/nx):goto 120
+80 if nx<0 and ny>=0 then an=atn(ny/nx)+pi:goto 120
+90 if nx<0 and ny<0 then an=atn(ny/nx)-pi:goto 120
+100 if nx=0 and ny>0 then an=pi/2:goto 120
+110 if nx=0 and ny<0 then an=-(pi/2)
+120 ri=sin(di*10)*.5+.5:sp=sin(an*5+di*8)*.5+.5:in=cos(nx*8)*cos(ny*8)*.5+.5
+130 w1=sin(nx*6):w2=cos(ny*6):co=(w1+w2)*.25+.5:va=(ri+sp+in)/3
+140 if va<0 then va=0
+150 if va>1 then va=1
+160 in=int(va*len(ac$)+1):ca$(y,x)=mid$(ac$,in,1):next x:next y:for y=0 to h-1
+170 for x=0 to w-1:print ca$(y,x);:next x:print:next y:print#1:close 1
