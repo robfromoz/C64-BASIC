@@ -1,0 +1,18 @@
+10 rem ascii art generator (amazon quick) by rob vonk 2026
+20 rem based on pseudocode assembled by amazon quick using the prompt "can you
+30 rem do pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:pi=3.14159265:ch$=" .:-=+*#%@":open 1,4:cmd 1:for y=0 to h-1
+60 li$="":for x=0 to w-1:nx=(x-w/2)/(w/2):ny=(y-h/2)/(h/2):di=sqr(nx*nx+ny*ny)
+70 w1=sin(di*10):w2=cos((nx+ny)*8):an=0:if nx>0 then an=atn(ny/nx):goto 120
+80 if nx<0 and ny>=0 then an=atn(ny/nx)+pi:goto 120
+90 if nx<0 and ny<0 then an=atn(ny/nx)-pi:goto 120
+100 if nx=0 and ny>0 then an=pi/2:goto 120
+110 if nx=0 and ny<0 then an=-(pi/2)
+120 d2=di:if d2<-1.2 then d2=-1.2
+130 if d2>1.2 then d2=1.2
+140 w3=sin(an*5+tan(d2)*2):gr=sin(nx*pi*6)*cos(ny*pi*6)
+150 co=(w1*.35)+(w2*.25)+(w3*.2)+(gr*.2):no=(co+1)/2:if no<0 then no=0
+160 if no>1 then no=1
+170 in=int(no*len(ch$)):li$=li$+mid$(ch$,in,1):next x:print li$:next y
+180 print#1:close 1
