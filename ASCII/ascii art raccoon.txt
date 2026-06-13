@@ -1,0 +1,16 @@
+10 rem ascii art generator (raccoon ai) by rob vonk 2026
+20 rem based on pseudocode assembled by raccoon ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:sc=1.5:ch$=" .:-=+*#%@":pi=atn(1)*4:open 1,4:cmd 1:for y=0 to h-1
+60 for x=0 to w-1:nx=(x/w)*4-2:ny=(y/h)*4-2:di=sqr(nx*nx+ny*ny):va=0
+70 va=va+sin(nx*sc)*.3:va=va+cos(ny*sc)*.3:va=va+tan(di*sc)*.2/(1+di):an=0
+80 if nx>0 then an=atn(ny/nx):goto 130
+90 if nx<0 and ny>=0 then an=atn(ny/nx)+pi:goto 130
+100 if nx<0 and ny<0 then an=atn(ny/nx)-pi:goto 130
+110 if nx=0 and ny>0 then an=pi/2:goto 130
+120 if nx=0 and ny<0 then an=-(pi/2)
+130 va=va+sin(an*sc)*.2:no=(va+1)/2:if no<0 then no=0
+140 if no>1 then no=1
+150 ci=int(no*len(ch$)+1):if ci>10 then ci=10
+160 print mid$(ch$,ci,1);:next x:print:next y:print#1:close 1
