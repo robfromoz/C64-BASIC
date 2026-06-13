@@ -1,12 +1,13 @@
 10 rem ascii art (atoms) by rob vonk 2026
-11 rem based on pseudocode written by atoms ai using the prompt "can you do
-12 rem pseudocode that displays a procedurally-generated ascii pattern using
-13 rem formulas such as sin() cos() sqr() and tan()"
-20 w=80:h=65:pi=atn(1)*4:ch$=" .:-=+*#%@":open 1,4:cmd 1:for y=0 to h-1:li$=""
-30 for x=0 to w-1:nx=(x/w)*2*pi-pi:ny=(y/h)*2*pi-pi:v1=sin(nx*3+ny*2)
-40 v2=cos(ny*4-nx*1.5):v3=sin(sqr(nx*nx+ny*ny))*3:v4=tan(nx*.3)*cos(ny*2)
-45 if v4<-1 then v4=-1
-50 if v4>1 then v4=1
-60 va=(v1+v2+v3+v4)/4:no=(va+1)/2:if no<0 then no=0
-70 if no>1 then no=1
-80 in=int(no*9)+1:li$=li$+mid$(ch$,in,1):next x:print li$:next y
+20 rem based on pseudocode written by atoms ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:pi=atn(1)*4:ch$=" .:-=+*#%@":open 1,4:cmd 1:for y=0 to h-1:li$=""
+60 for x=0 to w-1:nx=(x/w)*2*pi-pi:ny=(y/h)*2*pi-pi:v1=sin(nx*3+ny*2)
+70 v2=cos(ny*4-nx*1.5):v3=sin(sqr(nx*nx+ny*ny))*3:v4=tan(nx*.3)*cos(ny*2)
+80 if v4<-1 then v4=-1
+90 if v4>1 then v4=1
+100 va=(v1+v2+v3+v4)/4:no=(va+1)/2:if no<0 then no=0
+110 if no>1 then no=1
+120 in=int(no*9)+1:li$=li$+mid$(ch$,in,1):next x:print li$:next y:print#1
+130 close 1
