@@ -1,0 +1,16 @@
+10 rem ascii art generator (devin) by rob vonk 2026
+20 rem based on pseudocode assembled by devin ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:pi=atn(1)*4:ch$=" .:-=+*#%@":open 1,4:cmd 1:for y=0 to h-1:li$=""
+60 for x=0 to w-1:nx=(x-w/2)/(w/2):ny=(y-h/2)/(h/2):di=sqr(nx*nx+ny*ny):an=0
+70 if nx>0 then an=atn(ny/nx):goto 120
+80 if nx<0 and ny>=0 then an=atn(ny/nx)+pi:goto 120
+90 if nx<0 and ny<0 then an=atn(ny/nx)-pi:goto 120
+100 if nx=0 and ny>0 then an=pi/2:goto 120
+110 if nx=0 and ny<0 then an=-(pi/2)
+120 v1=sin(di*10-an*3):v2=cos(nx*8)*sin(ny*8):v3=sin(an*5+di*6)
+130 v4=tan(di*3)-int(tan(di*3)/1)*1:if abs(v4)>1 then v4=0
+140 va=(v1+v2+v3+v4)/4:in=int((va+1)/2*9):if in<0 then in=0
+150 if in>9 then in=9
+160 li$=li$+mid$(ch$,in+1,1):next x:print li$:next y:print#1:close 1
