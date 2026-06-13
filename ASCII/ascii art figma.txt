@@ -1,0 +1,11 @@
+10 rem ascii art generator (figma) by rob vonk 2026
+20 rem based on pseudocode assembled by figma make using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:ch$=" .:-=+*#%@":open 1,4:cmd 1:for y=0 to h-1:for x=0 to w-1
+60 nx=(x-w/2)/w*6.28:ny=(y-h/2)/h*6.28:v1=sin(nx*2)*cos(ny*2)
+70 v2=tan(nx*.5)*sin(ny*.5):v3=sqr(abs(sin(nx+ny))):no=((v1+v2*.3+v3*.5)+2)/4
+80 if no<0 then no=0
+90 if no>1 then no=1
+100 ci=int(no*len(ch$)+1):print mid$(ch$,ci,1);:next x:print:next y:print#1
+110 close 1
