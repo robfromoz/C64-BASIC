@@ -1,0 +1,20 @@
+10 rem ascii art generator (surething) by rob vonk 2026
+20 rem based on pseudocode assembled by surething using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 print"{clear}":print"=== ascii pattern generator ==="
+60 w=80:input"width (default 80";w
+70 h=40:input"height (default 40)";h
+80 sc=1:input"scale (default 1.0)";sc
+90 rf=8:input"ripple frequency (default 8.0)";rf
+100 sf=4:input"spiral frequency (default 4.0)";sf
+110 sm=1:input"swirl mix / angle (default 1.0)";sm
+120 pm$="blend":input"mode - ripple/spiral/swirl/blend (default blend)";pm$
+130 ch$=" .:-=+*#%@":open 1,4:cmd 1:for y=0 to h-1:for x=0 to w-1:nx=(x/w)*2-1
+140 ny=(y/h)*2-1:di=sqr(nx*nx+ny*ny)*sc:an=tan(nx)*cos(ny*3.14)
+150 if pm$="ripple" then va=sin(di*rf):goto 190
+160 if pm$="spiral" then va=cos(an+di*sf):goto 190
+170 if pm$="swirl" then va=sin(nx*sm-ny*cos(sm)):goto 190
+180 ri=sin(di*rf):sp=cos(an+di*sf):sw=sin(nx*sm-ny*cos(sm)):va=(ri+sp+sw)/3
+190 va=(va+1)/2:in=int(va*len(ch$)+1):print mid$(ch$,in,1);:next x:print:next y
+200 print#1:close 1
