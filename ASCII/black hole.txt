@@ -1,0 +1,13 @@
+10 rem black hole ascii art by rob vonk 2026
+20 rem based upon pseudocode assembled by chatgpt using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()" and "how about other
+50 rem functions such as exp, log, atn, etc?"
+60 w=80:h=65:s=.2:open 1,4:cmd 1:for y=0 to h-1:for x=0 to w-1:fx=(x-w/2)*s
+70 fy=(y-h/2)*s:r=sqr(fx*fx+fy*fy):v=cos(20/(r+.1))
+80 if v<-1 then c$=".":goto 130
+90 if v<-.5 then c$=":":goto 130
+100 if v<0 then c$="*":goto 130
+110 if v<.5 then c$="o":goto 130
+120 c$="#"
+130 print c$;:next x:print:next y:print#1:close 1
