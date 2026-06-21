@@ -1,0 +1,12 @@
+10 rem ascii art generator (chat box ai) by rob vonk 2026
+20 rem based on pseudocode assembled by chat box ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:sc=.1:open 1,4:cmd 1:for y=0 to h-1:for x=0 to w-1:nx=x*sc:ny=y*sc
+60 va=sin(nx)+cos(ny)+sqr(nx*nx+ny*ny)-abs(tan(nx-ny)):no=(va+5)/10
+70 if no<.2 then print" ";:goto 120
+80 if no<.4 then print".";:goto 120
+90 if no<.6 then print"*";:goto 120
+100 if no<.8 then print"o";:goto 120
+110 print"#";
+120 next x:print:next y:print#1:close 1
