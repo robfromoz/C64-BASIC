@@ -1,0 +1,8 @@
+10 rem ascii art generator (blackbox) by rob vonk 2026
+20 rem based on pseudocode assembled by blackbox ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:pi=atn(1)*4:open 1,4:cmd 1:for y=0 to h-1:for x=0 to w-1
+60 nx=(x/w)*2*pi:ny=(y/h)*2*pi:va=sin(nx)+cos(ny)+tan(nx*ny)
+70 ci=abs(va*10)-int(abs(va*10)/95)*95:ac$=chr$(ci+32):print ac$;:next x
+80 print:next y:print#1:close 1
