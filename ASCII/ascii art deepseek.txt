@@ -1,0 +1,10 @@
+10 rem ascii art deepseek by rob vonk 2026
+20 rem based on pseudocode assembled by deepseek using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 co=80:ro=65:sc=6:ch$=" .:-=+*#%@":open 1,4:cmd 1:for y=0 to ro-1:li$=""
+60 for x=0 to co-1:u=(x/co-.5)*sc:v=(y/ro-.5)*sc:r=sqr(u*u+v*v)+.001
+70 va=sin(u*5)*cos(v*5)+.5*sin(r*8)+.2*tan(r*3):va=(va+2)/4:if va<0 then va=0
+80 if va>1 then va=1
+90 in=int(va*len(ch$)):li$=li$+mid$(ch$,in+1,1):next x:print li$:next y
+100 print#1:close 1
