@@ -1,0 +1,11 @@
+10 rem ascii art generator (maxai) by rob vonk 2026
+20 rem based on pseudocode assembled by claude ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 rem open 1,4,7 opens printer for upper case/lower case output
+60 w=80:h=65:pc$=" .:;oO#@":nc=len(pc$):fx=.1:fy=.05:am=2:px=0:py=1:ox=5:oy=3
+70 sf=.5:open 1,4,7:cmd 1:for y=0 to h-1:cr$="":for x=0 to w-1:nx=x*fx+px+ox
+80 ny=y*fy+py+oy:sv=sin(nx):cv=cos(ny):ct=sv+cv:si=abs(ct):sv=sqr(si)*sf
+90 tn=tan(nx*.5):tv=tn*am*.1:fv=(ct*am)+sv+tv
+100 ci=int(abs(fv)*10)-(int(abs(fv)*10/nc))*nc:ch$=mid$(pc$,ci+1,1):cr$=cr$+ch$
+110 next x:print cr$:next y:print#1:close 1
