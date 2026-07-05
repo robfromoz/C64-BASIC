@@ -1,0 +1,8 @@
+10 rem ascii art generator (duck ai/gemma) by rob vonk 2026
+20 rem based on pseudocode assembled by duck ai/gemma using the prompt "can you
+30 rem do pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:ch$=" .:-=+*#%@":cl=len(ch$):open 1,4:cmd 1:for y=0 to h-1:rs$=""
+60 for x=0 to w-1:nx=x*.1:ny=y*.1:wa=sin(nx)+cos(ny):di=sqr(nx^2+ny^2)
+70 sp=tan(nx*ny*.01):fv=(wa*sin(di))+(sp*.1):ci=abs(fv*5)-int(abs(fv*5)/cl)*cl
+80 rs$=rs$+mid$(ch$,ci+1,1):next x:print rs$:next y:print#1:close 1
