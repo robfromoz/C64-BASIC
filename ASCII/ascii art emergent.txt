@@ -1,0 +1,10 @@
+10 rem ascii art generator (emergent) by rob vonk 2026
+20 rem based on pseudocode assembled by emergent ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:pa$=" .-+*#@":pl=len(pa$):open 1,4:cmd 1:for y=0 to h-1
+60 for x=0 to w-1:nx=(x/w)*2-1:ny=(y/h)*2-1:d=sqr(nx*nx+ny*ny)
+70 v=sin(d*10)+cos(nx*5)+sin(ny*5)*cos(nx*ny*8):tn=tan(d*2):if tn>1 then tn=1
+80 if tn<-1 then tn=-1
+90 id=int(((v+4)/8)*pl):print mid$(pa$,id,1);:next x:print:next y:print#1
+100 close 1
