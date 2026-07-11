@@ -1,0 +1,11 @@
+10 rem ascii art generator 2 (loveable) by rob vonk 2026
+20 rem based on pseudocode assembled by loveable ai using the prompt "can you
+30 rem do pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:as=.5:pa$=" .:-=+*#%@":open 1,4:cmd 1:for y=0 to h-1:li$=""
+60 for x=0 to w-1:nx=(x/w)*2-1:ny=((y/h)*2-1)*as:r=sqr(nx*nx+ny*ny)
+70 th=tan(ny/(nx+.0001)):w1=sin(r*r*8):w2=cos(6*th):w3=sin(nx*5)*cos(ny*5)
+80 va=(w1+w2+3)/3:va=(va+1)/2:if va<0 then va=0
+90 if va>1 then va=1
+100 id=int(va*len(pa$)):li$=li$+mid$(pa$,id,1):next x:print li$:next y:print#1
+110 close 1
