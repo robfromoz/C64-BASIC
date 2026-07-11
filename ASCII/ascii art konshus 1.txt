@@ -1,0 +1,12 @@
+10 rem ascii art generator 1 (konshus) by rob vonk 2026
+20 rem based on pseudocode assembled by claude ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 rem original pseudocode altered by chatgpt to avoid division by zero error
+60 rem in rv formula
+70 w=80:h=65:pi=atn(1)*4:gc$=" .:-=+*#%@":open 1,4:cmd 1:for y=0 to h-1
+80 for x=0 to w-1:nx=(x/w)*(2*pi):ny=(y/h)*(2*pi):rv=sin(nx)*cos(ny)+sin(nx*3)
+90 mi=-2:ma=2:no=(rv-mi)/(ma-mi):if no<0 then no=0
+100 if no>1 then no=1
+110 gi=int(no*len(gc$)+1):print mid$(gc$,gi,1);:next x:print:next y:print#1
+120 close 1
