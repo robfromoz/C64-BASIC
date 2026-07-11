@@ -1,0 +1,17 @@
+10 rem ascii art generator (rockets ai) by rob vonk 2026
+20 rem based on pseudocode assembled by rockets ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:pi=atn(1)*4:ch$=" .:-=+*#%@":open 1,4:cmd 1:for ro=0 to h-1
+60 for co=0 to w-1:nx=(co/w)*2-1:ny=(ro/h)*2-1:di=sqr(nx*nx+ny*ny):an=0
+70 if nx>0 then an=atn(ny/nx):goto 120
+80 if nx<0 and ny>=0 then an=atn(ny/nx)+pi:goto 120
+90 if nx<0 and ny<0 then an=atn(ny/nx)-pi:goto 120
+100 if nx=0 and ny>0 then an=pi/2:goto 120
+110 if nx=0 and ny<0 then an=-(pi/2)
+120 ri=sin(di*10):sp=cos(an*6+di*8):wa=sin(nx*8)*cos(nx*8):tw=tan(di*1.5)*.3
+130 if tw<-1 then tw=-1
+140 if tw>1 then tw=1
+150 fi=(ri+sp+wa+tw)/4:in=int((fi+1)/2*(len(ch$))):if in<1 then in=1
+160 if in>len(ch$) then in=len(ch$)
+170 print mid$(ch$,in,1);:next co:print:next ro:print#1:close 1
