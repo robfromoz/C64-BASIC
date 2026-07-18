@@ -1,0 +1,14 @@
+10 rem ascii art generator (seeles) by rob vonk 2026
+20 rem based on pseudocode assembled by seeles ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:sc=.16:open 1,4:cmd 1:for y=0 to h-1:li$="":for x=0 to w-1
+60 px=(x-w/2)*sc:py=(y-h/2)*sc:ra=sqr(px*px+py*py):tp=tan(px*.35)
+70 if abs(tp)>4 then tp=4*sgn(tp)
+80 va=sin(px*2+cos(py*1.5))+cos(ra*4)+sin(py*3)*.6+tp*.08
+90 if va>1.4 then ch$="@":goto 140
+100 if va>.8 then ch$="#":goto 140
+110 if va>.2 then ch$="*":goto 140
+120 if va>-.4 then ch$=".":goto 140
+130 ch$=" "
+140 li$=li$+ch$:next x:print li$:next y:print#1:close 1
