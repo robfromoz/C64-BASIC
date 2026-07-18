@@ -1,0 +1,15 @@
+10 rem ascii art generator (codeconvert) by rob vonk 2026
+20 rem based on pseudocode assembled by codeconvert ai using the prompt "can you
+30 rem do pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:open 1,4:cmd 1:for y=0 to h-1:li$="":for x=0 to w-1:nx=(x/w)*2-1
+60 ny=(y/h)*2-1:va=sin(nx*10)+cos(ny*10)+tan(nx*ny*5)+sqr(abs(nx*ny))*2
+70 if va<-3 then va=-3
+80 if va>3 then va=3
+90 if va<-2 then ch$="@":goto 150
+100 if va<-1 then ch$="#":goto 150
+110 if va<0 then ch$="*":goto 150
+120 if va<1 then ch$="+":goto 150
+130 if va<2 then ch$="-":goto 150
+140 ch$="."
+150 li$=li$+ch$:next x:print li$:next y:print#1:close 1
