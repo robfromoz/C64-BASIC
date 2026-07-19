@@ -1,0 +1,10 @@
+10 rem sine rings ascii art (v0) by rob vonk 2026
+20 rem based on pseudocode assembled by v0 ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 ra$=" .:-=+*#%@":ra=len(ra$):w=80:h=65:cx=w/2:cy=h/2:open 1,4:cmd 1
+60 for y=0 to h-1:for y=0 to h-1:li$="":for x=0 to w-1:dx=x-cx:dy=(y-cy)*2
+70 di=sqr(dx*dx+dy*dy):va=sin(di*.4):no=(va+1)/2:if no<0 then no=0
+80 if no>1 then no=1
+90 in=int(no*ra+1):li$=li$+mid$(ra$,in,1):next x:print li$:next y:print#1
+100 close 1
