@@ -1,0 +1,18 @@
+10 rem mandala spiral ascii art by rob vonk 2026
+20 rem based on pseudocode assembled by matilda ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:pi=atn(1)*4:lc=.9:sc=.7:tc=.5:fc=.3:open 1,4:cmd 1:for y=0 to h-1
+60 for x=0 to w-1:nx=(x/w)*2-1:ny=(y/h)*2-1:r=sqr(nx*nx+ny*ny):th=0
+70 if nx>0 then th=atn(ny/nx):goto 120
+80 if nx<0 and ny>=0 then th=atn(ny/nx)+pi:goto 120
+90 if nx<0 and ny<0 then th=atn(ny/nx)-pi:goto 120
+100 if nx=0 and ny>0 then th=pi/2:goto 120
+110 if nx=0 and ny<0 then th=-(pi/2)
+120 ma=tan(r*8):sp=sin(th*4+r*10)*(1-r*.5):bl=r*.6:va=ma*(1-bl)+sp*bl
+130 ac=abs(nx*2)+abs(nx*2):va=va*.7+ac*.3:if va>lc then print"#";:goto 180
+140 if va>sc then print"*";:goto 180
+150 if va>tc then print".";:goto 180
+160 if va>fc then print"'";:goto 180
+170 print" ";
+180 next x:print:next y:print#1:close 1
