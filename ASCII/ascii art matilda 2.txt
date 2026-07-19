@@ -1,0 +1,12 @@
+10 rem ascii art generator 2 (matilda) by rob vonk 2026
+20 rem based on pseudocode assembled by matilda ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:open 1,4:cmd 1:for y=0 to h-1:for x=0 to w-1:nx=(x/w)*2-1
+60 ny=(y/h)*2-1:v1=tan(nx*3.14159*2+ny*1.5):v2=abs(nx*3)-abs(ny*2)
+70 v3=sqr(nx*nx+ny*ny):va=v1*.4+v2*.3+v3*.3:if v>.8 then print"#";:goto 120
+80 if va>.3 then print"*";:goto 120
+90 if va>-.2 then print".";:goto 120
+100 if va>-.7 then print"'";:goto 120
+110 print" ";
+120 next x:print:next y:print#1:close 1
