@@ -1,0 +1,18 @@
+10 rem ascii spiral pattern (autocoder) by rob vonk 2026
+20 rem based on pseudocode assembled by autocoder using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:pi=atn(1)*4:open 1,4:cmd 1:for y=0 to h-1:li$="":for x=0 to w-1
+60 nx=(x-w/2):ny=(y-h/2):r=sqr(nx*nx+ny*ny)/6
+70 a=0:if nx>0 then a=atn(ny/nx):goto 120
+80 if nx<0 and ny>=0 then a=atn(ny/nx)+pi:goto 120
+90 if nx<0 and ny<0 then a=atn(ny/nx)-pi:goto 120
+100 if nx=0 and ny>0 then a=pi/2:goto 120
+110 if nx=0 and ny<0 then a=-(pi/2)
+120 v=sin(r+a*4)+cos(r/2):if tan(a+.0001)>1 then v=v+.3
+130 rem adding .0001 to tan argument avoids division by zero error
+140 ch$=" ":if v>1.2 then ch$="@":goto 180
+150 if v>.5 then ch$="#":goto 180
+160 if v<-2 then ch$="*":goto 180
+170 if v>-.8 then ch$="."
+180 li$=li$+ch$:next x:print li$:next y:print#1:close 1

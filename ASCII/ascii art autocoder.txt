@@ -1,0 +1,12 @@
+10 rem ascii art generator (autocoder) by rob vonk 2026
+20 rem based on pseudocode assembled by autocoder using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:open 1,4:cmd 1:for y=0 to h-1:li$="":for x=0 to w-1:nx=(x-w/2)/10
+60 ny=(y-h/2)/10:v=sin(nx)+cos(ny)+sin(sqr(nx*nx+ny*ny))
+70 if abs(tan(nx*ny/8))>1 then v=v+.5
+80 ch$=" ":if v>1.5 then ch$="@":goto 120
+90 if v>.8 then ch$="#":goto 120
+100 if v>.2 then ch$="*":goto 120
+110 if v>-.5 then ch$="."
+120 li$=li$+ch$:next x:print li$:next y:print#1:close 1
