@@ -1,0 +1,13 @@
+10 rem ascii art generator (overchat) by rob vonk 2026
+20 rem based on pseudocode assembled by overchat ai using the prompt "can you
+30 rem do pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:se=3.14159:ra$=" .:-=+*#%@":n=len(ra$):open 1,4:cmd 1
+60 for y=0 to h-1:li$="": for x=0 to w-1:nx=(x-w/2)/(h/2):ny=(y-h/2)/(h/2)
+70 r=sqr(nx*nx+ny*ny):ep=.0001:v1=sin(10*r+se):v2=cos(4*nx-3*ny+se*.7)
+80 v3=sin(6*nx+se*.3)*cos(6*ny-se*.2):v4=tan((nx*ny+se*.1)/1.6+ep)
+90 va=.55*v1+.3*v2+.35*v3+.1*v4:if va>1.2 then va=1.2
+100 if va<-1.2 then va=-1.2
+110 t=(va+1.2)/2.4:id=int(t*n):if id<1 then id=1
+120 if id>n then id=n
+130 li$=li$+mid$(ra$,id,1):next x:print li$:next y:print#1:close 1

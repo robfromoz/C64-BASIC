@@ -1,0 +1,20 @@
+10 rem ascii art generator 1 (ai2) by rob vonk 2026
+20 rem based on pseudocode assembled by ai2 using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:cx=w/2:cy=h/2:pi=atn(1)*4:ra=w/2-2:if h<w then ra=h/2-2
+60 open 1,4:cmd 1:for y=0 to h-1:for x=0 to w-1:nx=(x-cx)/(w/2):ny=(y-cy)/(h/2)
+70 r=sqr(nx*nx+ny*ny):if r>1 then r=1
+80 th=0:if nx>0 then th=atn(ny/nx):goto 130
+90 if nx<0 and ny>=0 then th=atn(ny/nx)+pi:goto 130
+100 if nx<0 and ny<0 then th=atn(ny/nx)-pi:goto 130
+110 if nx=0 and ny>0 then th=pi/2:goto 130
+120 if nx=0 and ny<0 then th=-(pi/2)
+130 sv=sin(th*4):cv=cos(th*3+sv):tv=tan(sv*.5)
+140 if abs(tv)>10 then tv=0:goto 160
+150 tv=tv/(10+abs(tv))
+160 pv=(sv+cv+tv)/3:ch$="*":if pv<0 then ch$=".":goto 200
+170 if pv<.25 then ch$=" ":goto 200
+180 if pv<.5 then ch$="+":goto 200
+190 if pv<.75 then ch$="#"
+200 print ch$;:next x:print:next y:print#1:close 1

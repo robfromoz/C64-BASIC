@@ -1,0 +1,9 @@
+10 rem ascii art generator (julius) by rob vonk 2026
+20 rem based on pseudocode assembled by julius ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:ch$=" .:-=+*#%@":open 1,4:cmd 1:for y=0 to h-1:li$=""
+60 for x=0 to w-1:nx=(x-w/2)/12:ny=(y-h/2)/12
+70 v=sin(nx)+cos(ny)+sin(sqr(nx*nx+ny*ny))+.25*tan(nx*ny)
+80 in=abs(v)*3-int(abs(v)*3/len(ch$))*len(ch$):li$=li$+mid$(ch$,in+1,1)
+90 next x:print li$:next y:print#1:close 1
