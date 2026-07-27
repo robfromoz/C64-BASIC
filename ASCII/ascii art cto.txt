@@ -1,0 +1,16 @@
+10 rem ascii art generator (cto) by rob vonk 2026
+20 rem based on pseudocode assembled by cto ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:ch$=" .:-=+*#%@":pi=atn(1)*4:open 1,4:cmd 1:for y=0 to h-1:ro$=""
+60 for x=0 to w-1:nx=(x/w)*4-2:ny=(y/h)*4-2:di=sqr(nx*nx+ny*ny):ri=sin(di*4)
+70 an=0:if nx>0 then an=atn(ny/nx):goto 120
+80 if nx<0 and ny>=0 then an=atn(ny/nx)+pi:goto 120
+90 if nx<0 and ny<0 then an=atn(ny/nx)-pi:goto 120
+100 if nx=0 and ny>0 then an=pi/2:goto 120
+110 if nx=0 and ny<0 then an=-(pi/2)
+120 ra=sin(an*6):gx=cos(nx*6):gy=cos(ny*6):gr=gx*gy:sr=tan(di*3+an)
+130 sp=sr-int(sr):va=0:va=va+ri*.35+ra*.25+gr*.2+sp*.2:if va<0 then va=0
+140 if va>1 then va=1
+150 in=int(va*len(ch$)):ro$=ro$+mid$(ch$,in+1,1):next x:print ro$:next y
+160 print#1:close 1

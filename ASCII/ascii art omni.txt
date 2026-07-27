@@ -1,0 +1,10 @@
+10 rem ascii art generator (omni) by rob vonk 2026
+20 rem based on pseudocode assembled by omni ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:pa$=" .:-=+#%@":pi=3.141592654:open 1,4:cmd 1:for ro=0 to h-1
+60 li$="":for co=0 to w-1:x=(co/w)*2*pi:y=(ro/h)*2*pi:wa=sin(x*3+y*2)
+70 wb=cos(x*2.3-y*4.1):va=wa+wb:no=(va+2)/4:id=int(no*len(pa$))
+80 if id<1 then id=1
+90 if id>len(pa$) then id=len(pa$)
+100 li$=li$+mid$(pa$,id+1,1):next co:print li$:next ro:print#1:close 1
