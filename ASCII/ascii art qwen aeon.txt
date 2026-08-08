@@ -1,0 +1,9 @@
+10 rem ascii art generator (qwen aeon) by rob vonk 2026
+20 rem based on pseudocode assembled by qwen aeon using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:cs$=" .:-+=*#@":open 1,4:cmd 1:for y=0 to h-1:for x=0 to w-1
+60 nx=x-(w/2):ny=y-(h/2):va=sin(nx/3)*cos(ny/3)+tan(sqr(nx*nx+ny*ny)/5)
+70 in=int((va+4)*len(cs$)/8)+1:if in<1 then in=1
+80 if in>len(cs$) then in=len(cs$)
+90 print mid$(cs$,in,1);:next x:print:next y:print#1:close 1
