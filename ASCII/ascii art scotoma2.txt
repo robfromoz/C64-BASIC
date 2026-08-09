@@ -1,0 +1,11 @@
+10 rem ascii art generator (scotoma 2) by rob vonk 2026
+20 rem based on pseudocode assembled by scotoma 2 ai using the prompt "can you
+30 rem dopseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:sc=.2:open 1,4:cmd 1:for y=0 to h-1:for x=0 to w-1:nx=x*sc
+60 ny=y*sc:di=sqr(nx*nx+ny*ny):va=sin(nx)+sin(ny)+cos(nx*ny)
+70 if va>1 then print"#";:goto 110
+80 if va>0 then print"*";:goto 110
+90 if va>-1 then print".";:goto 110
+100 print" ";
+110 next x:print:next y:print#1:close 1

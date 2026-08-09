@@ -1,0 +1,12 @@
+10 rem ascii art generator (wizardlm) by rob vonk 2026
+20 rem based on pseudocode assembled by wizardlm ai using the prompt "can you
+30 rem do pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:gr$=" .:!/r(l1Z4H9W8$@":gl=len(gr$):dim gr$(h,w):for y=0 to h-1
+60 for x=0 to w-1:gr$(y,x)=" ":next x:next y:xs=.2:ys=.2:open 1,4,7:cmd 1
+70 for y=0 to h-1:for x=0 to w-1:nx=(x-w/2)*xs:ny=(y-h/2)*ys
+80 di=sqr(nx*nx+ny*ny):w1=sin(nx):w2=cos(ny*.7):w3=tan(di*.3)*.2
+90 cv=(w1+w2+w3)/(di+1):sd=sin(di*.5):fv=cv+.5*sd:no=(fv+1)/2:if no<0 then no=0
+100 if no>1 then no=1
+110 ci=int(no*gl):gr$(y,x)=mid$(gr$,ci+1,1):next x:next y:for y=0 to h-1
+120 for x=0 to w-1:print gr$(y,x);:next x:print:next y:print#1:close 1

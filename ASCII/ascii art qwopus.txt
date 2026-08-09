@@ -1,0 +1,9 @@
+10 rem ascii art generator (qwopus) by rob vonk 2026
+20 rem based on pseudocode assembled by qwopus ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:ch$=" .,:;=+*?%#@ ":nc=len(ch$):open 1,4:cmd 1:for y=0 to h-1
+60 li$="":for x=0 to w-1:cx=x-(w/2):cy=y-(h/2):si=sin(cx*.15)+cos(cy*.15)
+70 ta=tan(cx*.05)*tan(cy*.05)*.5:sq=sqr(cx*cx+cy*cy)*.02:va=si+ta+sq
+80 ri=int(va*10)-int((va*10)/nc)*nc:if ri<0 then ri=ri+nc
+90 li$=li$+mid$(ch$,ri+1,1):next x:print li$:next y:print#1:close 1

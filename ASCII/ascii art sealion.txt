@@ -1,0 +1,11 @@
+10 rem ascii art generator (sealion) by rob vonk 2026
+20 rem based on pseudocode assembled by sealion ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:am=10:fr=.05:sc=30:ox=0:oy=0:ch$=" .:-=+*#%@":open 1,4:cmd 1
+60 for y=0 to h-1:for x=0 to w-1
+70 va=sin((x+ox)*fr)*am+cos((y+oy)*fr)*am+sqr(abs(sin(x+y)*fr))*am
+80 nv=(va+30)/60:if nv<0 then nv=0
+90 if nv>1 then nv=1
+100 in=int(nv*len(ch$)):print mid$(ch$,in,1);:next x:print:next y:print#1
+110 close 1

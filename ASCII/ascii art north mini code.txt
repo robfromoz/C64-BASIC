@@ -1,0 +1,12 @@
+10 rem ascii art generator (north mini code) by rob vonk 2026
+20 rem based on pseudocode assembled by cohere north mini code ai using the
+30 rem prompt "can you do pseudocode that displays a procedurally-generated
+40 rem ascii pattern using formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:dim o$(h,w):sx=6:sy=3:ox=2:oy=1:cs$="@%#*+=-:. ":open 1,4:cmd 1
+60 for ro=0 to h-1:ny=(ro/(h-1))*sy-oy:for co=0 to w-1:nx=(co/(w-1))*sx-ox
+70 ep=.001:ts=sin(nx):tc=cos(ny):tt=tan(nx*ny):tq=sqr(nx*nx+ny*ny)
+80 rv=ts*tc+tt/(tq+ep):if rv<-2 then rv=-2
+90 if rv>2 then rv=2
+100 id=int((rv+2)/4*len(cs$)):o$(ro,co)=mid$(cs$,id+1,1):next co:next ro
+110 for ro=0 to h-1:for co=0 to w-1:print o$(ro,co);:next co:print:next ro
+120 print#1:close 1

@@ -1,0 +1,14 @@
+10 rem ascii art generator (olmo) by rob vonk 2026
+20 rem based on pseudocode assembled by olmo ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:fr=.15:am=1:tp=.4:pi=atn(1)*4:cs$=".-+*#":open 1,4:cmd 1
+60 for y=0 to h-1:li$="":for x=0 to w-1:nx=(x-w/2)/(w/2):ny=(y-h/2)/(h/2)
+70 r=sqr(nx*nx+ny*ny):w1=sin(nx*fr*2*pi+ny*fr*pi)*am
+80 w2=cos(nx*fr*pi+ny*fr*2*pi)*am:rf=exp(-r*r/.6):tf=(nx+ny)-int((nx+ny)/tp)*tp
+90 if abs(tf)<1e-6 then tf=0:goto 110
+100 tf=tan(tf/tp)
+110 tf=(tf+abs(tf))/(2*abs(tf)+1e-6):va=(w1+w2+rf+tf)*4:if va<0 then va=0
+120 if va>15 then va=15
+130 ch=va-int(va/len(cs$))*len(cs$):li$=li$+mid$(cs$,ch+1,1):next x:print li$
+140 next y:print#1:close 1
