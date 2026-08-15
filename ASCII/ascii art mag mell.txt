@@ -1,0 +1,7 @@
+10 rem ascii art generator (mag mell) by rob vonk 2026
+20 rem based on pseudocode assembled by mag mell ai using the prompt "can you
+30 rem do pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:sc=12:of=0:ac$=" .:-=+*#%@":open 1,4:cmd 1:for y=0 to h-1
+60 for x=0 to w-1:va=sin((x+of)/sc)*cos((y+of)/sc):va=sqr(abs(va))
+70 in=int(va*10):print mid$(ac$,in+1,1);:next x:print:next y:print#1:close 1

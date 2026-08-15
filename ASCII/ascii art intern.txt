@@ -1,0 +1,9 @@
+10 rem ascii art generator (intern) by rob vonk 2026
+20 rem based on pseudocode assembled by intern ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 cs$=" .:-=+*#%@":w=80:h=65:open 1,4:cmd 1:for y=0 to h-1:li$=""
+60 for x=0 to w-1
+70 va=(sin(x*.3)*cos(y*.3)+sqr(x)*tan(y*.1)*.2+sin(sqr(x*x+y*y)*.2))
+80 in=abs(va)*5:ci=int(in)-int(in/len(cs$))*len(cs$):li$=li$+mid$(cs$,ci+1,1)
+90 next x:print li$:next y:print#1:close 1

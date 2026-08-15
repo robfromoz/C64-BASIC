@@ -1,0 +1,11 @@
+10 rem ascii art generator (cogito) by rob vonk 2026
+20 rem based on pseudocode assembled by cogito ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:open 1,4:cmd 1:for y=0 to h-1:for x=0 to w-1:nx=(x*2)/w-1
+60 ny=(y*2)/h-1:w1=sin(nx*10):w2=cos(ny*10):w3=sin(sqr(nx*nx+ny*ny)*12)
+70 ci=.4/sqr(nx*nx+ny*ny+.01):co=w1+w2+w3+ci:in=abs(co):if in>1 then i=1
+80 ch$="#":if in<.25 then ch$=" ":goto 110
+90 if in<.5 then ch$=".":goto 110
+100 if in<.75 then ch$="*"
+110 print ch$;:next x:print:next y:print#1:close 1

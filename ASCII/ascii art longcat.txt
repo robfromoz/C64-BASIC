@@ -1,0 +1,43 @@
+10 rem ascii art generator (longcat) by rob vonk 2026
+20 rem based on pseudocode assembled by longcat ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:pi=3.14159266:dim px(3),py(3)
+60 print"{clear}":print"select pattern to generate:"
+70 print"1. sine wave interference":print"2. circular ripples"
+80 print"3. distance field (sqr)":print"4. tangent asymptotes"
+90 print"5. combined mathematical art":print:print"enter choice (1-5)";
+100 input i:if i<1 or i>5 then print:print"1-5 please.":goto 100
+110 open 1,4:cmd 1:on i gosub 170,210,250,310,360:print#1:close 1
+120 print:print"another pattern (y/n)";
+130 input i$:if i$<>"y" and i$<>"n" then print"y/n please.":goto 130
+140 if i$="y" then 60
+150 end
+160 rem sine wave interference
+170 for y=0 to h-1:li$="":for x=0 to w-1:nx=(x/w)*2*pi:ny=(y/h)*2*pi
+180 va=sin(nx*2)+cos(ny*3)+sin(nx+ny)*.5:lo=-2.5:hi=2.5:gosub 410:li$=li$+ch$
+190 next x:print li$:next y:return
+200 rem circular ripples
+210 cx=x/2:cy=y/2:for y=0 to h-1:li$="":for x=0 to w-1:dx=x-cx:dy=y-cy
+220 di=sqr(dx*dx+dy*dy):va=sin(di*.5):lo=-1:hi=1:gosub 410:li$=li$+ch$:next x
+230 print li$:next y:return
+240 rem distance field using sqr()
+250 data 20,10,60,10,40,30:restore:for i=1 to 3:read px(i),py(i):next i
+260 for y=0 to h-1:li$="":for x=0 to w-1:md=999999:for i=1 to 3:dx=x-px(i)
+270 dy=y-py(i):di=sqr(dx*dx+dy*dy):if di<md then md=di
+280 next i:va=sin(md*.3):lo=-1:hi=1:gosub 410:li$=li$+ch$:next x:print li$
+290 next y:return
+300 rem tangent asymptotes
+310 for y=0 to h-1:li$="":for x=0 to w-1:nx=(x/w)*4*pi-2*pi:ny=(y/h)*4*pi-2*pi
+320 va=tan(nx*.5)*cos(ny*.5):if va>2 then va=2
+330 if va<-2 then va=-2
+340 lo=-2:hi=2:gosub 410:li$=li$+ch$:next x:print li$:next y:return
+350 rem combined mathematical art
+360 for y=0 to h-1:li$="":for x=0 to w-1:nx=(x/w)*2*pi:ny=(y/h)*2*pi
+370 va=sin(nx)*cos(ny)+sin(sqr(nx*nx+ny*nx)*.5)*.5+tan(nx*.25)*.2
+380 va=va+sin(nx*3+ny*2)*.3:lo=-1.5:hi=1.5:gosub 410:li$=li$+ch$:next x
+390 print li$:next y:return
+400 rem map value to ascii character
+410 ra$=" .:-=+*#%@":rl=len(ra$):no=(va-lo)/(hi-lo):if no<0 then no=0
+420 if no>1 then no=1
+430 in=int(no*rl):ch$=mid$(ra$,in+1,1):return

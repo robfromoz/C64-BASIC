@@ -1,0 +1,13 @@
+10 rem ascii art generator (athene) by rob vonk 2026
+20 rem based on pseudocode assembled by claude ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 rem sc was altered from original value of .1 so a pattern would show
+60 w=80:h=65:sc=1.75:pi=atn(1)*4:fl=-1:fh=1:tl=0:th=1:open 1,4:cmd 1
+70 for y=0 to h-1:for x=0 to w-1:u=x/(w-1):v=y/(h-1):si=sin(u*pi*sc)
+80 co=cos(v*pi*sc):sq=sqr(u*v*sc):ta=tan((u+v)*pi*sc+.0001):in=(si+co+sq+ta)/4
+90 in=tl+(th-tl)*(in-fl)/(fh-fl):ch$="#":if in<.2 then ch$=" ":goto 130
+100 if in<.4 then ch$=".":goto 130
+110 if in<.6 then ch$="-":goto 130
+120 if in<.8 then ch$="+"
+130 print ch$;:next x:print:next y:print#1:close 1
