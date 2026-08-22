@@ -1,0 +1,13 @@
+10 rem ascii art generator (ornith) by rob vonk 2026
+20 rem based on pseudocode assembled by ornith ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=80:h=65:cd$=" .,:;=+*#@":sc=.15:open 1,4:cmd 1:for ro=0 to h-1
+60 y=(ro-h/2)*sc:rs$="":for co=0 to w-1:x=(co-w/2)*sc:rd=sqr(x*x+y*y)
+70 wa=sin(x*.3)*cos(y*.3):rt=tan(rd*2)/(1+rd):am=1+.6*sin(rd*1.5):va=wa+rt*am
+80 if va<-2.5 then va=-2.5
+90 if va>2.5 then va=2.5
+100 no=(va+2.5)/5:if no<0 then no=0
+110 if no>1 then no=1
+120 ci=int(no*len(cd$)+1):rs$=rs$+mid$(cd$,ci,1):next co:print rs$:next ro
+130 print#1:close 1

@@ -1,0 +1,11 @@
+10 rem ascii tangent waves by rob vonk 2026
+20 rem based on pseudocode assembled by kat coder ai using the prompt "can you
+30 rem do pseudocode that displays a procedurally-generated ascii pattern
+40 rem using formulas such as sin() cos() sqr() and tan()"
+50 open 1,4:cmd 1:print"=== tangent waves ===":for ro=-15 to 15:li$=""
+60 for co=0 to 79:x=co*.12:ba=12*tan(x)*cos(x*.3)
+70 wr=((ba+200)-int((ba+200)/24)*24)-12
+80 if abs(ro-wr)<1 then li$=li$+"#":goto 110
+90 if abs(ro-wr/2)<1 then li$=li$+"o":goto 110
+100 li$=li$+" "
+110 next co:print li$:next ro:print#1:close 1

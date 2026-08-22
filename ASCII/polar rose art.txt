@@ -1,0 +1,19 @@
+10 rem ascii polar rose art (kat coder) by rob vonk 2026
+20 rem based on pseudocode assembled by kat coder ai using the prompt "can you
+30 rem do pseudocode that displays a procedurally-generated ascii pattern
+40 rem using formulas such as sin() cos() sqr() and tan()"
+50 rem variable k = twice number of petals
+60 open 1,4:cmd 1:print"=== polar rose (r = cos(50)) ===":k=5:pi=atn(1)*4
+70 for ro=-20 to 20:li$="":for co=0 to 79:cx=(co-40)*.08:cy=ro*.08:th=0
+80 if cx>0 then th=atn(cy/cx):goto 130
+90 if cx<0 and cy>=0 then th=atn(cy/cx)+pi:goto 130
+100 if cx<0 and cy<0 then th=atn(cy/cx)-pi:goto 130
+110 if cx=0 and cy>0 then th=pi/2:goto 130
+120 if cx=0 and cy<0 then th=-(pi/2)
+130 r=sqr(cx*cx+cy*cy):rr=cos(k*th):if r<abs(rr)*1.2 and r<1 then 150
+140 goto 180
+150 if r<.3 then li$=li$+"@":goto 190
+160 if r<.7 then li$=li$+"*":goto 190
+170 li$=li$+"+":goto 190
+180 li$=li$+" "
+190 next co:print li$:next ro:print#1:close 1

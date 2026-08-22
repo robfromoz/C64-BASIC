@@ -1,0 +1,9 @@
+10 rem wave interference art by rob vonk 2026
+20 rem based on pseudocode assembled by kat coder ai using the prompt "can you
+30 rem do pseudocode that displays a procedurally-generated ascii pattern
+40 rem using formulas such as sin() cos() sqr() and tan()"
+50 open 1,4:cmd 1:print"=== wave interference ===":for ro=-20 to 20:li$=""
+60 for co=0 to 79:x=(co-40)*.25:y=ro*.25:va=sin(x)*cos(y)+sin(sqr(x*x+y*y)*2)
+70 no=(va+2)/4:ch$=" .:-=+*#%@":in=int(no*len(ch$)+1):if in<1 then in=1
+80 if in>len(ch$) then in=len(ch$)
+90 li$=li$+mid$(ch$,in,1):next co:print li$:next ro:print#1:close 1

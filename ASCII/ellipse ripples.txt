@@ -1,0 +1,10 @@
+10 rem ellipse ripple art by rob vonk 2026
+20 rem based on pseudocode assembled by kat coder ai using the prompt "can you
+30 rem do pseudocode that displays a procedurally-generated ascii pattern
+40 rem using formulas such as sin() cos() sqr() and tan()"
+50 open 1,4,7:cmd 1:print"=== ellipse ripples ===":ch$="O0o.:-+*"
+60 for ro=-20 to 20:li$="":for co=0 to 79:cx=(co-40)*.12:cy=ro*.15
+70 di=sqr(cx*cx+cy*cy):c$=" ":for ri=1 to 8:rr=ri*.5:th=.15+(ri-int(ri/3)*3)*.1
+80 if abs(di-rr)<th then c$=mid$(ch$,ri-int(ri/len(ch$))*len(ch$)+1,1):goto 100
+90 next ri
+100 li$=li$+c$:next co:print li$:next ro
