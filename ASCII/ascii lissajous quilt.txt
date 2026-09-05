@@ -1,0 +1,11 @@
+10 rem ascii lissajous weave quilt generator by rob vonk 2025
+20 rem based on pseudocode written by chatgpt using the prompt "could you do
+30 rem some pseudocode for a random procedurally-generated ascii quilt pattern
+40 rem using trigonometric functions" and "can you do some different trig
+50 rem formulae so that different patterns can be displayed, or tweak the
+60 rem current formula?"
+70 w=80:h=25:fx=.2:fy=.3:c$=" .:*+#%@":open 1,4:cmd 1:for y=0 to h-1:l$=""
+80 for x=0 to w-1:v=sin(x*.1+sin(y*.05))+cos(y*.1+cos(x*.05)):n=(v+2)/4
+90 i=int(n*len(c$)):if i>=len(c$) then i=len(c$)-1
+100 if i<1 then i=1
+110 l$=l$+mid$(c$,i,1):next x:print l$:next y:print#1:close 1
