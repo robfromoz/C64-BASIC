@@ -1,0 +1,23 @@
+10 rem australian rules dice game by rob vonk 2026
+20 rem from the paper "sport versus probability: dice simulation of australian
+30 rem rules football" by ray huntley, 2008.
+40 z=rnd(-ti):poke 53280,0:poke 53281,5:dim t$(2),g(2),b(2),p(2),d(7)
+50 print"{clear}{black}":print"this game simulates a game of"
+60 print"australian rules football using seven"
+70 print"dice rolled three times a quarter. each"
+80 print"time a six is rolled, a goal is scored"
+90 print"(six points) and each time a one is"
+100 print"rolled, a behind (one point) is scored."
+110 print:input"enter the home team";t$(1):input"enter the away team";t$(2)
+120 for i=1 to 2:g(i)=0:b(i)=0:p(i)=0:next i:for i=1 to 2:print:print t$(i)
+130 for j=1 to 4:for k=1 to 3:for l=1 to 7:d(l)=int(rnd(1)*6+1)
+140 print chr$(48+d(l));:if d(l)=6 then g(i)=g(i)+1
+150 if d(l)=1 then b(i)=b(i)+1
+160 next l:if k<3 then print"/";
+170 next k:p(i)=g(i)*6+b(i):print g(i);b(i);p(i):next j:next i
+180 if p(1)>p(2) then print:print t$(1);" wins by";t(1)-t(2);"point(s)!"
+190 if p(2)>p(1) then print:print t$(2);" wins by";t(2)-t(1);"point(s)!"
+200 if p(1)=p(2) then print:print"it's a draw!"
+210 print:print"another game (y/n)";
+220 input i$:if i$<>"y" and i$<>"n" then print"y/n please.":goto 220
+230 if i$="y" then 110
