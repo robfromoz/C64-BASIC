@@ -4,7 +4,7 @@
 40 rem formulas such as sin() cos() sqr() and tan()"
 50 rem this program outputs to the printer using open, print# and cmd. change
 60 rem these to run on your particular system.
-70 w=80:h=65:s=.2:open 1,4:cmd 1:for y=0 to h-1:for x=0 to w-1:fx=(x-w/2)*s:
+70 w=80:h=65:s=.2:open 1,4:cmd 1:for y=0 to h-1:for x=0 to w-1:fx=(x-w/2)*s
 80 fy=(y-h/2)*s:v=sin(sqr(fx*fx+fy*fy))+cos(fx*2+tan(fy))
 90 if v<-1 then c$=".":goto 140
 100 if v<-.5 then c$=":":goto 140
