@@ -1,0 +1,23 @@
+10 rem random gary numan lyric generator by rob vonk 2021
+20 dim a$(12),b$(12),c$(12),d$(12):z=rnd(-ti):def fnr(x)=int(rnd(1)*x+1)
+30 data "my","fragmented","mirror","is haunted by your smile"
+40 data "this","rusted","machine","whispers 'you, you, you'"
+50 data "your","chrome","soul","seeks shelter from the new skin"
+60 data "my dog's","dying","scar","burns from this rage called 'you'"
+70 data "john's","new","tear","falls in love with such aircraft"
+80 data "god's","glass","cry","sleeps upstairs under shadows"
+90 data "the phone's","old","body","is a mystery to strangers"
+100 data "the alien's","dark","scream","is on hold"
+110 data "","fearless","window","just left me for myself"
+120 data "","cold","flesh","shows no emotion"
+130 data "","last","mother","is afraid, reach me, reach you"
+140 data "","crying","angel","dials 'me', stop the new game"
+150 for i=1 to 12:read a$(i),b$(i),c$(i),d$(i):next i
+160 print"{147}":print"this program is called 'gary numan"
+170 print"lyric generator'."
+180 print:input"number of lyrics";n:print:for i=1 to n
+190 a=fnr(8):b=fnr(12):c=fnr(12):d=fnr(12)
+200 print a$(a);" ";b$(b);" ";c$(c);" ";d$(d):next i
+210 print:print"another song (y/n)";
+220 input i$:if i$<>"y" and i$<>"n" then print"y or n please.":goto 220
+230 if i$="y" then 180
