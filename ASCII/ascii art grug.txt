@@ -1,0 +1,17 @@
+10 rem ascii art generator (grug) by rob vonk 2026
+20 rem based on pseudocode assembled by grug ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 ro=65:co=80:pi=atn(1)*4:ch$=" .:-=+*#%@":open 1,4:cmd 1:for r=0 to ro-1
+60 li$="":for c=0 to co-1:x=c-co/2:y=r-ro/2:di=sqr(x*x+y*y):an=0
+70 if x>0 then an=atn(y/x):goto 120
+80 if x<0 and y>=0 then an=atn(y/x)+pi:goto 120
+90 if x<0 and y<0 then an=atn(y/x)-pi:goto 120
+100 if x=0 and y>0 then an=pi/2:goto 120
+110 if x=0 and y<0 then an=-(pi/2)
+120 if di<.0001 then va=0:goto 140
+130 t1=sin(an*5):t2=cos(di*.3):t3=tan(an+di*.05):t4=sqr(di)*.01:va=t1*t2+t3*t4
+140 no=(va+3)/6:if no<0 then no=0
+150 if no>1 then no=1
+160 in=int(no*len(ch$)):if in<1 then in=1
+170 c$=mid$(ch$,in,1):li$=li$+c$:next c:print li$:next r:print#1:close 1
