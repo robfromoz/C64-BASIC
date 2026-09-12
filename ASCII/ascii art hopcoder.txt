@@ -1,0 +1,14 @@
+10 rem ascii art generator (hopcoder) by rob vonk 2026
+20 rem based on pseudocode assembled by hopcoder ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 w=79:h=64:open 1,4:cmd 1:for y=-h/2 to h/2:o$="":for x=-w/2 to w/2
+60 di=sqr(x*x+y*y):rw=sin(di/2):aw=cos(x/2)*sin(y/2):sm=tan(di/4+x/3)
+70 va=(rw+aw+(sm/3))/2:if va>1 then va=1
+80 if va<-1 then va=-1
+90 in=(va+1)/2:ch$=" ":if in>.8 then ch$="@":goto 140
+100 if in>.6 then ch$="#":goto 140
+110 if in>.4 then ch$="*":goto 140
+120 if in>.2 then ch$="+":goto 140
+130 if in>.05 then ch$="."
+140 o$=o$+ch$:next x:print o$:next y:print#1:close 1
