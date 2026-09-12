@@ -1,0 +1,11 @@
+10 rem ascii art generator (gemini) by rob vonk 2026
+20 rem based on pseudocode assembled by gemini ai using the prompt "can you do
+30 rem pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 rem program has fixes suggested by gemini after program from original
+60 rem pseudocode was found not to work properly
+70 w=80:h=65:fr=10:ac$=" .:;ox%#@":open 1,4,7:cmd 1for y=0 to h-1
+80 for x=0 to w-1:nx=(x-(w/2))/(w/2):ny=(y-(h/2))/(h/2):vs=sin(nx*fr)
+90 vc=cos(ny*fr):co=vs+vc:nv=(co+2)/4:ci=int(nv*len(ac$)):if ci<1 then ci=1
+100 if ci>len(ac$) then ci=len(ac$)
+110 print mid$(ac$,ci,1);:next x:print:next y:print#1:close 1
