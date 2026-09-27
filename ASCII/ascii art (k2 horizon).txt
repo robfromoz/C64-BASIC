@@ -1,0 +1,16 @@
+10 rem ascii art generator (k2 horizon) by rob vonk 2026
+20 rem based on pseudocode assembled by k2 horizon ai using the prompt "can you
+30 rem do pseudocode that displays a procedurally-generated ascii pattern using
+40 rem formulas such as sin() cos() sqr() and tan()"
+50 sw=80:sh=65:cp$=" .:-=*#%@":pi=atn(1)*4:open 1,4:cmd 1:for y=0 to sh-1
+60 for x=0 to sw-1:cx=x-sw/2:cy=y-sh/2:cg=sin(cx*.1)*cos(cy*.1)
+70 dc=sqr((cx*cx)+(cy*cy)):cr=sin(dc*.2):an=0
+80 if cx>0 then an=atn(cy/cx):goto 130
+90 if cx<0 and cy>=0 then an=atn(cy/cx)+pi:goto 130
+100 if cx<0 and cy<0 then an=atn(cy/cx)-pi:goto 130
+110 if cx=0 and cy>0 then an=pi/2:goto 130
+120 if cx=0 and cy<0 then an=-(pi/2)
+130 cs=sqr(abs(tan(dc*.5))):fv=(cg*1.5)+(cr*3)+(cv*2)+cs:if fv<-8 then fv=8
+140 if fv>8 then fv=8
+150 nv=(fv+8)/16:ci=int(nv*len(cp$)):print mid$(cp$,ci,1);:next x:print:next y
+160 print#1:close 1
