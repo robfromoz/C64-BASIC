@@ -13,12 +13,12 @@
 130 m$(i,j)="#"
 140 next j
 150 rem select a random cell and set it to visited
-160 next i:x=int(rnd(1)*(((mx-1)-2)/2+1))*2+2:y=int(rnd(1)*(((my-1)-2)/2+1))*2+2
+160 next i:x=int(rnd(1)*(mx/2-1))*2+2:y=int(rnd(1)*(my/2-1))*2+2
 170 m(y,x)=1:c=c-1
 180 rem if unvisited cell count is zero, display maze
 190 if c=0 then 820
 200 rem select another random cell to start our random walk from
-210 sx=int(rnd(1)*(((mx-1)-2)/2+1))*2+2:sy=int(rnd(1)*(((my-1)-2)/2+1))*2+2
+210 sx=int(rnd(1)*(mx/2-1))*2+2:sy=int(rnd(1)*(my/2-1))*2+2
 220 if m(sy,sx)<>0 then 210
 230 x=sx:y=sy
 240 m(y,x)=-1
