@@ -13,7 +13,7 @@
 130 m$(i,j)="#"
 140 next j
 150 rem start at random cell
-160 next i:x=int(rnd(1)*(((mx-1)-2)/2+1))*2+2:y=int(rnd(1)*(((my-1)-2)/2+1))*2+2
+160 next i:x=int(rnd(1)*(mx/2-1))*2+2:y=int(rnd(1)*(my/2-1))*2+2
 170 rem if unvisited cell count is zero, display maze
 180 if c=0 then 460
 190 rem set random direction north = 1, south = 2, east = 3, west = 4
