@@ -1,0 +1,17 @@
+10 rem cellular automata ascii art by rob vonk 2026
+20 rem based upon pseudocode assembled by chatgpt using the prompt "i'd like
+30 rem some pseudocode to generate an abstract ascii art piece, you can use
+40 rem trig functions, cellular automata, controlled randomness or a
+50 rem combination of all three"
+60 w=80:h=40:z=rnd(-ti):dim g(h,w),ng(h,w):ch$=" .:-=+*#%@":open 1,4:cmd 1
+70 for y=0 to h-1:for x=0 to w-1:no=rnd(1)*2-1:wx=sin(x*.15):wy=cos(y*.15)
+80 co=wx+wy+no:va=(co+2)/4:in=int(va*len(ch$)):if in<1 then in=1
+90 if in>len(ch$) then in=len(ch$)
+100 g(y,x)=in:next x:next y:for i=1 to 2:for y=0 to h-1:for x=0 to w-1
+110 ng(y,x)=g(y,x):next x:next y:for y=1 to h-2:for x=1 to w-2:sn=0
+120 for dy=-1 to 1:for dx=-1 to 1:if dx<>0 or dy<>0 then sn=sn+g(y+dy,x+dx)
+130 next dx:next dy:av=sn/8:ni=int((g(y,x)+av)/2):if ni<1 then ni=1
+140 if ni>len(ch$) then ni=len(ci$)
+150 ng(y,x)=ni:next x:next y:for y=0 to h-1:for x=0 to w-1:g(y,x)=ng(y,x)
+160 next x:next y:next i:for y=0 to h-1:li$="":for x=0 to w-1
+170 li$=li$+mid$(ch$,g(y,x),1):next x:print li$:next y:print#1:close 1
