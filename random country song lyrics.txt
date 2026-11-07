@@ -1,0 +1,68 @@
+10 rem random country music lyrics generator author and year unknown
+20 rem basic program derived from original c program by rob vonk 2026
+30 s1=11:s2=11:s3=11:s4=11:s5=11:s6=12:s7=12:s8=12:s9=12:sa=12:sb=12:sc=12
+40 dim s1$(s1),s2$(s2),s3$(s3),s4$(s4),s5$(s5),s6$(s6),s7$(s7),s8$(s8),s9$(s9)
+50 dim sa$(sa),sb$(sb),sc$(sc):z=rnd(-ti):for i=1 to s1:read s1$(i):next i
+60 for i=1 to s2:read s2$(i):next i:for i=1 to s3:read s3$(i):next i
+70 for i=1 to s4:read s4$(i):next i:for i=1 to s5:read s5$(i):next i
+80 for i=1 to s6:read s6$(i):next i:for i=1 to s7:read s7$(i):next i
+90 for i=1 to s8:read s8$(i):next i:for i=1 to s9:read s9$(i):next i
+100 for i=1 to sa:read sa$(i):next i:for i=1 to sb:read sb$(i):next i
+110 for i=1 to sc:read sc$(i):next i:def fnr(x)=int(rnd(1)*x+1)
+120 print"{clear}{white}":poke 53280,0:poke 53281,0:print"i met her ";
+130 print s1$(fnr(s1));" ";s2$(fnr(s2)):print"i can still recall ";
+140 print s3$(fnr(s3));" she wore ":print"she was ";s4$(fnr(s4));" ";
+150 print s5$(fnr(s5));",":print"and i knew ";s6$(fnr(s6));";"
+160 print s7$(fnr(s7));" i'd ";s8$(fnr(s8));" forever;":print"she said to me ";
+170 print s9$(fnr(s9));";":print"but who'd have thought she'd ";sa$(fnr(sa));
+180 print" ";sb$(fnr(sb));";":print sc$(fnr(sc));" goodbye."
+190 print:print"another song (y/n)";
+200 input i$:if i$<>"y" and i$<>"n" then print"y/n please.":goto 200
+210 if i$="y" then 120
+220 data on the highway,in sheboygan,outside fresno,at a truck stop
+230 data on probation,in a jail cell,in a nightmare,incognito,in the stone age
+240 data in a treehouse,in a gay bar,in september,at mcdonald's,ridin' shotgun
+250 data wrestlin' gators,all hunched over,poppin' uppers,sort of pregnant
+260 data with joggers,stoned on oatmeal,with merv griffin,dead all over
+270 data that purple dress,that little hat,that burlap bra,those training pants
+280 data the stolen goods,that plastic nose,the stassin pin,the neon sign
+290 data that creepy smile,the hearing aid,the boxer shorts
+300 data sobbin' at the toll booth,drinkin' dr. pepper
+310 data weighted down with twinkies,breakin' out with acne
+320 data crawlin' through the prairie,smellin' kind of funny
+330 data crashin' through the guardrail,chewin' on a hangnail
+340 data talkin' in swahili,drownin' in the quicksand,slurpin' up linguini
+350 data in the twilight,but i loved her,by the off-ramp,near poughkeepsie
+360 data with her cobra,when she shot me,on her elbows,with led zeppelin
+370 data with miss piggy,with a wetback,in her muu-muu
+380 data no guy would love her more,that she would be an easy score
+390 data she'd bought her dentures in a store,that she would be a crashing bore
+400 data i'd never rate her more than '4',they'd hate her guts in baltimore
+410 data "it was a raven, nothing more",we really lost the last world war
+420 data i'd have to scrape her off the floor,what strong deodorants were for
+430 data that she was rotten to the core,that i would upchuck on the floor
+440 data i promised her,i knew deep down,she asked me if,i told her shrink
+450 data the judge declared,my pooh bear said,i shrieked in pain
+460 data the painters knew,a klingon said,my hamster thought
+470 data the blood test showed,her rabbi said,stay with her,warp her mind
+480 data swear off booze,change my sex,punch her out,live off her
+490 data have my rash,stay a dwarf,hate her dog,pick my nose,play 'go fish'
+500 data salivate,our love would never die,there was no other guy
+510 data man wasn't meant to fly,that nixon didn't lie,her basset hound was shy
+520 data that rolaids made her high,she'd have a swiss on rye
+530 data she loved my one blue eye,her brother's name was hy
+540 data she liked 'spy vs. spy',that birthdays made her cry
+550 data she couldn't stand my tie,run off,wind up,boogie,yodel,sky dive
+560 data turn green,freak out,blast off,make it,black out,bobsled,grovel
+570 data with my best friend,in my edsel,on a surfboard,on 'the gong show'
+580 data with her dentist,on her 'workmate',with a robot,with no clothes on
+590 data at her health club,in her maytag,with her guru,while in labor
+600 data you'd think at least that she'd have said
+610 data i never had the chance to say,she told her fat friend grace to say
+620 data i now can kiss my credit cards,i guess i was too smashed to say
+630 data i watched her melt away and sobbed
+640 data she fell beneath the wheels and cried,she sent a hired thug to say
+650 data she freaked out on the lawn and screamed
+660 data pushed her off the bridge and waved
+670 data but that's the way that pygmies say
+680 data she sealed me in the vault and smirked
